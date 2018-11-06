@@ -27,10 +27,7 @@ clickTool.onMouseDown = (e) => {
 }
 
 paper.view.draw()
-
-// global variables
-var funds = 50
-var hand = []
+// The Game
 
 // Two helper functions
 function rand (m, n) {
@@ -39,18 +36,47 @@ function rand (m, n) {
 function randFace () {
   return ['crown', 'anchor', 'heart', 'spade', 'club', 'diamond'][rand(0, 5)]
 }
+
+// global variables
+var funds = 50
+var round = 0
+// place bets
 while (funds > 1 && funds < 100) {
+  round++
+  console.log(`round ${round}:`)
+  console.log(`\tstarting funds: ${funds}p`)
   const bets = { crown: 0, anchor: 0, heart: 0, spade: 0, club: 0, diamond: 0 }
   let totalBet = rand(1, funds)
   if (totalBet === 7) {
     totalBet = funds
     bets.heart = totalBet
   } else {
-    // distribute total bet
+    // distribute bets
+    let remaining = totalBet
+    do {
+      let bet = rand(1, remaining)
+      let face = randFace()
+      bets[face] = bets[face] + bet
+      remaining = remaining - bet
+    } while (remaining > 0)
   }
-  funds = funds - totalBet
-  // place bets
-  // roll dice
-  // take winnigs
-}
+  funds = funds = totalBet
+  console.log('\tbets: ' +
+    Object.keys(bets).map(face => `${face}: ${bets[face]} pence`).join(', ') + ` (total: ${totalBet} pence)`)
 
+  // roll dice x3
+  const hand = []
+  for (let i = 0; i < 3; i++) {
+    hand.push(randFace())
+  }
+  console.log(`\thand: ${hand.join(', ')}`)
+
+  // take winnings
+  let winnings = 0
+  for (let j = 0; j < hand.length; j++) {
+    let face = hand[j]
+    if (bets[face] > 0) winnings = winnings + bets[face]
+  }
+  funds = funds + winnings
+  console.log(`\twinnings: ${winnings}`)
+}
