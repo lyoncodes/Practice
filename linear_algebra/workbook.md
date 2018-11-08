@@ -1,4 +1,4 @@
-* I. Multistep Inequalities with Variables on Both Sides
+* I. Multistep Linear Inequalities
 
 * KEY: When you multiply or divide both sides of an equation by a negative 		number you must swap the inequality.
 
@@ -79,14 +79,15 @@ Let d represent the number of hot dogs Joey eats per minute. Write an inequality
 
 * Algebra:
 
-9d > 72 - 10
-9d > 62
-/9   /9
-d  > 62/9
-d >= 7
+	9d > 72 - 10
+	9d > 62
+	/9   /9
+	d  > 62/9
+	d >= 7
 
 # 4. #
 30b + 53 >= 18b - 83
+
 
 # 5. #
 Every day, Katie looks for seashells on the beach. She has 28 shells in her collection. Katie finds 12 more shells each day.
@@ -107,6 +108,8 @@ Write an inequality to determine the number of days, d, it will take Katie to co
 			}
 		} console.log(shells.length)
 	}
+	labDaysLeft(100, 12)
+
 * Alegebra:
 	12d > 100 - 28
 	12d > 72
@@ -122,8 +125,41 @@ Mrs. Morton has a special reward system for her class. When all her students beh
 Let r represent the number of additional times the class is rewarded. Write an inequality to determine how many more times the class needs to be rewarded in order to earn a party.
 
 * JS
-var days = []
-for (let i = 24; i <= 100; i+= 3) {
-	days.push(i)
+function marbleParty(currentMarbles) {
+  var days = []
+  for (let i = currentMarbles; i <= 100; i += 3) {
+	  days.push(i)
+  }	
 }
-console.log(days)
+marbleParty(28)
+
+# 8. #
+	12t - 2 < -5t + 36
+	+5t      + 5t
+	17t - 2 < 36
+			+ 2  + 2
+	17t     < 38
+	/17      /17
+	t       < 38/17  
+
+# 9. #
+	-42v + 33 < 8v + 91
+			- 33      - 33
+	-42v      < 8v + 58
+	-8v       - 8v
+	-50v      < 58
+	-1(-50v)  < -1(58)
+	50v       > -58
+	v > -58/50
+	v > -29/20
+
+# 10. #
+	8m + 95 < -87m + 5
+		-  5        - 5
+	8m + 90 < -87m
+	-8m       -8m
+	90      < -95m
+	-1(90)  < -1(-95m)
+	-90     > 95m
+	/95     > /95
+	-18/19  > m

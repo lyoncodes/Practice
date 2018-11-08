@@ -1,0 +1,11 @@
+.problem {
+	width: 40%;
+	border: 1px solid aquamarine;
+	background-color: aquamarine;
+}
+.problemBox {
+	width: 75%;
+	border: 1px solid pink;
+	margin: auto 50px;
+	background-color: pink;
+}
