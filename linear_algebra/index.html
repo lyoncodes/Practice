@@ -6,23 +6,32 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel= "stylesheet" href="style.css">
 	<title>Michael's Algebra</title>
+	<script src = "https://code.jquery.com/jquery-3.1.1.js"></script>
 </head>
 <body>
-		<div id = "body"></div>
+	
+<div id = "heading">
 	<h1 id = "mainTitle">This is a title</h1>
+	<p id = "greeting">Welcome, </p>
 	<div id = "links">
-<nav>This is a nav in a div</nav>
-<nav>This is a nav in a div</nav>
-<nav>This is a nav in a div</nav>
+		<a id = "binary" href="binary_search.js">Binary Search</a>
+	</div>
 </div>
 
+<h1>My To-Do List</h1>
+<input type = "text" placeholder = "New item" />
+<button id = "add">Add</button>
+<ol id = "mylist"></ol>
+
 <div class = "problem">
+	<button>Toggle Colors</button>
 	<div class = "problemBox" id = "problemBox">
 		<img src="" class = "popUp">
 		<img src="" class = "popUp">
 		<img src="" class = "popUp">
 	</div>
 </div>
+
 <script src= "main.js"></script>
 <script src = "linear_search.js"></script>
 <script src = "binary_search.js"></script>
