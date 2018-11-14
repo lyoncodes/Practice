@@ -204,7 +204,22 @@ Let r represent the number of additional times the class is rewarded. Write an i
 ## Get The Mean of Array
 
 ## Highest and Lowest
-
+    function highAndLow(numbers){
+  	  var numbers = numbers.split(' ').map(Number)
+  	  var min = numbers[0]
+  	  var max = numbers[0]
+  	    for (let i in numbers) {
+   	      if (numbers[i] < min) {
+     	min = numbers[i]
+          }
+  	    }
+        for (let j in numbers) {
+          if (numbers[j] > max) {
+           max = numbers[j]
+         }
+      }
+      return `${max} ${min}`
+    }
 ## Transportation on Vacation
 
 	function baseCost (days, rates) {
@@ -247,3 +262,16 @@ The refactoring was revealing, as the array indices can be used to achieve the c
 	}
 
 Too Simple!
+## First Consecutive Numbers
+return the first value of the array that does not contain a consecutive number. A cool if conditional expression to memorize.
+
+    function firstNonConsecutive (arr) {
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i]-1 > arr[i -1]) {
+         return arr[i]
+        }
+      }
+         return null
+    }
+## Invert Values
+
