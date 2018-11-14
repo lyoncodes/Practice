@@ -203,3 +203,47 @@ Let r represent the number of additional times the class is rewarded. Write an i
 
 ## Get The Mean of Array
 
+## Highest and Lowest
+
+## Transportation on Vacation
+
+	function baseCost (days, rates) {
+	  return days * rates
+	}
+	function discountRates (days) {
+	  if (days >= 7) {
+	    return 50
+	  }
+	  else if (days >= 3) {
+	    return 20
+	  }
+	  else {
+	    return 0
+	  }
+	}
+	function rentalCarCost(days) {
+	  return baseCost(days, 40) - discountRates(days)
+	}
+
+## Switch it Up! --Switch statement practice
+The initial switch statement was long and spelled-out
+
+    function switchItUp(number){
+      switch (number) {
+	   case 0:
+	   number = "Zero"
+	   break;
+	   case 1: 
+	   number = "One"
+       break;
+							etc...
+
+      return number
+      }
+The refactoring was revealing, as the array indices can be used to achieve the case condition: 
+
+    switchItUp = (n) => {
+	  return ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"] [n]
+	}
+
+Too Simple!
