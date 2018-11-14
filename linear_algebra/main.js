@@ -1,13 +1,18 @@
 'use strict'
+// Some JQUERY drills
+
 $(function () {
   $('#mainTitle').html("Michael's Math")
 })
+
 $(function () {
   $('#greeting').after('Michael')
 })
+
 $(function () {
   $('#problemBox').text('5x + 7 > 3(x + 1)')
 })
+
 $(function () {
   var title = $('<h1></h1>').text('Greetings!')
   var subtitle = $('<h3></h3>').text('Here is what I\'ve been up to these days')
@@ -34,11 +39,15 @@ $(function () {
     var val = $("input").val()
     if (val !== '') {
       var elem = $("<li></li>").text(val)
-      $(elem).append("<button class = 'remove'>X</button>")
+      $(elem).append("<button class ='remove'> X </button>")
       $("#mylist").append(elem)
       $("input").val("")
+      $(".remove").on("click", function() {
+        $(this).parent().remove()
+      })
     }
   })
 })
-// var problemBox = document.getElementById('problemBox')
-// problemBox.textContent = '5x + 7 > 3(x + 1)'
+// Here's a handy pair of functions that calculate rates and discounts. This is from the CodeWars KATA titled, "Transportation on Vacation."
+
+
