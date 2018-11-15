@@ -9,3 +9,11 @@
 	margin: auto 50px;
 	background-color: pink;
 }
+.problemBoxToggle {
+	background-color: orange;
+	border: 1px solid orange;
+}
+.headline {
+	color: green;
+	margin: auto 250px;
+}
