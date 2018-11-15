@@ -1,54 +1,29 @@
 'use strict'
-// Some JQUERY drills
 $(document).ready(function () {
   // jQuery goes here
 })
 
-$(function() {
-  $("#mainTitle").html("Welcome to Michael's Math")
+$(function () {
+  var darkMatter = $('<div></div>').height(100)
+  $('#left').css({float: 'left', width: '50%', height: '100%'})
+  $('#mainTitle').html('Michael Lyon')
+  $('#mainTitle').css({marginLeft: '125px', float: 'left'})
+  $('#mainTitle').before(darkMatter)
 })
 $(function () {
-  $('#greeting').after("Young Hobbit Lyon")
-  $('#greeting').click(function () {
-    $('#greeting').toggleClass("headline")
-    $('#greeting').animate({
-      paddingLeft: '250px',
-      height: '250px'
-    }, 1000)
-  })
+  var darkMatter = $('<div></div>').height(200)
+  $('#right').css({float: 'right', width: '50%'})
+  $('.links').before(darkMatter)
+  $('.links a').css({margin: 'auto 250px', display: 'block'})
 })
 
-$(function () {
-  $('#problemBox').text('5x + 7 > 3(x + 1)')
-})
-
-$(function () {
-  var title = $('<h1></h1>').text('Greetings!')
-  var subtitle = $('<h3></h3>').text('Here is what I\'ve been up to these days')
-  $('#heading').before(title, subtitle)
-  $('#mainTitle').addClass("headline")
-  $('#mainTitle').css('background-color', 'lightyellow')
-})
-
-$(function () {
-  $('button').click(function () {
-    $('#problemBox').slideToggle(500)
-    $('#problemBox').toggleClass('problemBoxToggle')
-  })
-  $('#problemBox').css({'margin': '50px auto'})
-  $('button').css({'margin': '25px'})
-})
-
-$(function () {
-  $("#binary").click((e) => {
-    alert(e.pageX)
-    e.preventDefault()
-  })
-})
-
-$('#item').click(function() {
-  $('#submenu').slideToggle(500)
-})
-// Here's a handy pair of functions that calculate rates and discounts. This is from the CodeWars KATA titled, "Transportation on Vacation."
-
-
+// factorial function
+// a factorial is represented in math with the '!' sign. It is the product of a number times all the numbers beneath it. Thus, (4!) = 24, because 4 * 3 * 2 * 1 = 24.
+function factorial (number) {
+  if (number === 1) {
+    return number
+  } else {
+    return number * factorial(number - 1)
+  }
+}
+console.log(factorial(20))
