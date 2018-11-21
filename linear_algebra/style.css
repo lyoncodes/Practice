@@ -1,3 +1,6 @@
+#container {
+	height: 1350px;
+}
 .problem {
 	width: 40%;
 	border: 1px solid aquamarine;
