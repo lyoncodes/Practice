@@ -5,7 +5,7 @@ $(document).ready(function () {
 // RIGHT
 $(function () {
   var darkMatter = $('<div></div>').height(100)
-  $('#left').css({float: 'left', width: '50%', height: '100%', 'background-color': '#d9ffcc'})
+  $('#left').css({float: 'left', width: '50%', height: '100%', 'background-color': '#606263'})
   $('#mainTitle').html('Michael Lyon')
   $('#mainTitle').css({'text-align': 'center'})
   $('#mainTitle').before(darkMatter)
@@ -15,7 +15,7 @@ $(function () {
   var darkMatter = $('<div></div>').height(200)
   $('#right').css({float: 'left', width: '50%', height: '100%', 'background-color': '#ffffcc'})
   $('.links').before(darkMatter)
-  $('.links a').css({float: 'left', width: '33%', margin: '12px 33.33%', padding: '15px', border: '1px solid #d9ffcc', 'text-align': 'center'})
+  $('.links div').css({width: '33%', margin: '12px 33.33%', padding: '15px', border: '4px solid #d9ffcc', 'text-align': 'center', display: 'flex', 'justify-content': 'center'})
 })
 
 // factorial function
