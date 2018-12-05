@@ -14,3 +14,19 @@ $(function () {
   // Add to page
   $('.content-placeholder').html(theCompiledHtml)
 })
+// $(function () {
+//   Handlebars.registerHelper('capitalize', function (str) {
+//     str = str || ''
+//     return str.slice(0, 1).toUpperCase() + str.slice(1)
+//   })
+//   var theTemplateString = $('#built-in-helpers-template').html()
+//   var theTemplate = Handlebars.compile(theTemplateString)
+
+// })
+
+$(function () {
+  Handlebars.registerHelper('capitalize', (arr) => {
+    arr = arr || []
+    return arr[0].slice(0, 1).toUpperCase()
+  })
+})

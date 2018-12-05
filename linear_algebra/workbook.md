@@ -196,14 +196,74 @@ Let r represent the number of additional times the class is rewarded. Write an i
 
 	 // see how reverse() can be achieved with the backwards loop? When looping backwards, maybe reverse() can be called to simplify the task.
 ## Min & Max Functions
+*Your task is to make two functions, max and min (maximum and minimum in PHP) that take a(n) array/vector of integers list as input and outputs, respectively, the largest and lowest number in that array/vector.
 
+	var min = function(list){
+	var minNum = list[0]
+	  for(let i = 1; i < list.length; i ++){
+	    if(minNum > list[i]){
+	    minNum = list[i]
+	    }
+	  }
+	  return minNum;
+	}
+	var max = function(list){
+	var maxNum = list[0]
+	for (let i = 1; i < list.length; i ++) {
+	  if (maxNum < list[i]) {
+	    maxNum = list[i]
+	  }
+	}
+	return maxNum;
+	}
 ## Fake Binary
+*Given a string of digits, you should replace any digit below 5 with '0' and any digit 5 and above with '1'. Return the resulting string.
 
+	function fakeBin(x){
+	  x = x.split('')
+	   for (let i in x) {
+	    if (x[i] >= 5) {
+		x[i] = 1
+	    } else if (x[i] <= 5) {
+		x[i] = 0
+	      }
+		}
+	  x = x.join('')
+	  return x
+	}
 ## Count By X
+*Create a function with two arguments that will return a list of length (n) with multiples of (x).
 
+Assume both the given number and the number of times to count will be positive numbers greater than 0.
+
+Return the results as an array (or list in Python, Haskell or Elixir).
+
+	function countBy(x, n) {
+	var answerArray = []
+	var answerLength = (x * n)
+	  for (let i = x; i < answerLength+1; i += x) {
+	    answerArray.push(i)
+	  }
+	   return answerArray
+	}
 ## Get The Mean of Array
+*It's the academic year's end, fateful moment of your school report. The averages must be calculated. All the students come to you and entreat you to calculate their average for them. Easy ! You just need to write a script.
 
+Return the average of the given array rounded down to its nearest integer.
+
+The array will never be empty.
+
+    function getAverage(marks){
+	  var sum = 0
+       for (var i = 0; i < marks.length; i ++) {
+	     sum += marks[i]
+	    }
+	    var answer = (sum/marks.length);
+	    return Math.floor(answer)
+	}
 ## Highest and Lowest
+*In this little assignment you are given a string of space separated numbers, and have to return the highest and lowest number.
+
     function highAndLow(numbers){
   	  var numbers = numbers.split(' ').map(Number)
   	  var min = numbers[0]
@@ -273,5 +333,19 @@ return the first value of the array that does not contain a consecutive number. 
       }
          return null
     }
-## Invert Values
+## Square Every Digit
+*Welcome. In this kata, you are asked to square every digit of a number.
 
+For example, if we run 9119 through the function, 811181 will come out, because 92 is 81 and 12 is 1.
+
+Note: The function accepts an integer and returns an integer
+
+    function squareDigits(num){
+      num = num.toString().split('').map(Number)
+      for (var i = 0; i < num.length; i++) {
+        num[i] = num[i] ** 2
+      }
+        num = num.join('')
+        num = parseInt(num)
+      return num
+    }
