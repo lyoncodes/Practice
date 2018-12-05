@@ -40,4 +40,12 @@ Array.matrix = function (numrows, numcols, initializer) {
   }
   return arr
 }
+//
 
+$(function () {
+  $('.links div').css({width: '33%', margin: '12px 33.33%', padding: '15px', border: '4px solid salmon', 'text-align': 'center', display: 'flex', 'justify-content': 'center'})
+  $('#click').click(holla)
+})
+function holla () {
+  console.log('fresh images')
+}
