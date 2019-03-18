@@ -1,9 +1,13 @@
 'use strict'
 
 // Node Dependency
-require('dotenv').config()
 const express = require('express')
+const pg = require('pg')
+const superagent = require('superagent')
+const methodOverride = require('method-override')
 const parser = require('body-parser')
+
+require('dotenv').config()
 
 // Build HTTP Server
 const app = express();
@@ -12,6 +16,11 @@ const appName = "Day Today"
 //PORT
 const PORT = process.env.PORT || 3000;
 
+// Database Setup
+const client = new pg.Client(process.env.DATABASE_URL)
+client.connect()
+client.on('error', err => console.log(err))
+
 // Set the view engine
 app.set('view engine', 'ejs')
 app.use(parser.urlencoded({ extended: false }))
@@ -19,6 +28,7 @@ app.use(parser.json())
 
 // Routes
 app.get('/', home)
+app.get('/guest/add', save)
 app.post('/guest/add', save)
 app.get('/*', errorFunction)
 
