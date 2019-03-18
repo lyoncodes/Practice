@@ -1,39 +1,22 @@
-<%- include('../views/head.ejs') %>
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <%- include('../views/head.ejs'); %>
+</head>
 <body>
- <h1>Day Today</h1>
-
- <form id="form-user" action="#" method="POST">
-  <div class="form-box error" data-errormsg="">
-   <label for="input-first">First Name</label>
-   <input type="text" id="input-first" autofocus placeholder="First Name" tabindex="1"/>
-  </div>
-  <div class="form-box" data-errormsg="">
-   <label for="input-last">Last Name</label>
-   <input type="text" id="input-last" autofocus placeholder="Last Name" tabindex="2">
-  </div>
-  <div class="form-box" data-errormsg="">
-   <label for="input-email">Email</label>
-   <input type="text" id="input-email" autofocus placeholder="Email" tabindex="3">
-  </div>
-  <div class="form-box" data-errormsg="">
-   <label for="input-phone">Phone</label>
-   <input type="tel" id="input-phone" autofocus placeholder="Phone" tabindex="3">
-  </div>
-  <div class="form-box" data-errormsg="">
-   <label for="input-floor">Preferred floorplan</label>
-   <select id="input-floor" tabindex="4">
-    <option value="0">No Preference</option>
-    <option value="1">Studio</option>
-    <option value="2">Open 1-BR</option>
-    <option value="3">Traditional 1-BR</option>
-    <option value="4">2-BR 1-Bath</option>
-    <option value="5">2-BR 2-Bath</option>
-    <option value="6">Penthouse</option>
-   </select>
-  </div>
-  <div class="form-box" data-errormsg="">
-   <label for="input-move">Move-in Date</label>
-   <input type="date" id="input-move" autofocus placeholder="Move-in Date" tabindex="4">
-  </div>
+ <h1><%= topicHead %></h1>
+ <form name="form1" method="POST" action="/guest/add">
+ <table>
+   <tr>
+   <td>First Name</td>
+   <td><input type="text" name="fname"></td>
+   </tr>
+   <tr>
+   <td>Last Name</td>
+   <td><input type="text" name="lname"></td>
+   </tr>
+   <td colspan="2"><input type="submit" value="Save"></td>
+ </table>
  </form>
 </body>
+</html>
