@@ -28,7 +28,7 @@ app.use(parser.json())
 
 // Routes
 app.get('/', home)
-app.get('/guest/add', save)
+app.get('/', save)
 app.post('/guest/add', save)
 app.get('/*', errorFunction)
 
