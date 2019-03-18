@@ -8,6 +8,7 @@ const parser = require('body-parser')
 // Build HTTP Server
 const app = express();
 const appName = "Day Today"
+
 //PORT
 const PORT = process.env.PORT || 3000;
 
@@ -33,7 +34,10 @@ function home (req, res) {
 function save (req, res) {
   let guest = {
     first: req.body.fname,
-    last: req.body.lname
+    last: req.body.lname,
+    fplan: req.body.fplan,
+    moveIn: req.body.moveIn,
+    price: req.body.price
   }
   console.log(guest)
   res.render('index', {
