@@ -5,39 +5,10 @@
 </head>
 <body>
  <h1><%= topicHead %></h1>
- <form name="form1" method="POST" action="/guest/add">
- <table>
-   <tr>
-   <td>First Name</td>
-   <td><input type="text" name="fname"></td>
-   </tr>
-   <tr>
-   <td>Last Name</td>
-   <td><input type="text" name="lname"></td>
-   </tr>
-   <tr>
-   <td>Floor Plan</td>
-   <td>
-    <select name="fplan">
-    <option>Studio</option>
-    <option>Open 1-Br</option>
-    <option>1-Bedroom</option>
-    <option>1-Bedroom + Den</option>
-    <option>2-Bedroom</option>
-    <option>Penthouse</option>
-   </select>
-  </td>
-  </tr>
-  <tr>
-   <td>Move-In Date</td>
-   <td><input type="date" name="moveIn"></td>
-  </tr>
-  <tr>
-   <td>Price Range</td>
-   <td><input type="number" name="price"></td>
-  </tr>
-   <td colspan="2"><input type="submit" value="Save Guest"></td>
- </table>
- </form>
+ <div class="container">
+  <div class="form">
+   <%- include('../views/form.ejs') %>
+  </div>
+ </div>
 </body>
 </html>

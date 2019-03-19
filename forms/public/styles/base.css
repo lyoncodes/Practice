@@ -1,0 +1,21 @@
+h1 {
+ font-family: 'Press Start 2P', cursive;
+ font-size: 16px;
+ text-align: center
+}
+.container {
+ font-size: 8px;
+ font-family: 'Press Start 2P', cursive;
+ width: 300px;
+ min-height: 100vh;
+ height: 100%;
+ background: #fff;
+ margin: 0 auto;
+ margin-top: 20px;
+ box-shadow: 2px 2px 19px;
+ text-align: center;
+ padding: 20px;
+}
+.form {
+ padding: 25px;
+}
