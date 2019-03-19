@@ -24,6 +24,7 @@ client.on('error', err => console.log(err))
 // Set the view engine
 app.set('view engine', 'ejs')
 app.use(parser.urlencoded({ extended: false }))
+app.use(express.static('./public'))
 app.use(parser.json())
 
 // Routes
@@ -37,7 +38,6 @@ function home (req, res) {
  res.render('index', {
    topicHead: `${appName}`
  })
- console.log('user has reached homepage')
 }
 
 // POST route rendering functions
