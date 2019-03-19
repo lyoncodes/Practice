@@ -42,6 +42,7 @@ function home (req, res) {
 
 // POST route rendering functions
 function save (req, res) {
+  // create an object with the req.body (form data)
   let guest = {
     first: req.body.fname,
     last: req.body.lname,
@@ -50,10 +51,10 @@ function save (req, res) {
     price: req.body.price
   }
   console.log(guest)
-  res.render('index', {
-    topicHead: `${appName}`,
-    userValue: guest,
-  })
+    res.render('index', {
+      topicHead: `${appName}`,
+      userValue: guest,
+    })
 }
 
 function errorFunction (req, res) {
