@@ -18,4 +18,10 @@ h1 {
 }
 .form {
  padding: 25px;
+ display: flex;
+ flex-direction: column;
+ margin: 50px
+}
+.table tr {
+ line-height: 25px;
 }
