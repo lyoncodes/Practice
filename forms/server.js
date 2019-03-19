@@ -39,7 +39,7 @@ function home (req, res) {
    topicHead: `${appName}`
  })
 }
-
+let tix = 100;
 // POST route rendering functions
 function save (req, res) {
   let guest = {
@@ -52,7 +52,8 @@ function save (req, res) {
   console.log(guest)
   res.render('index', {
     userValue: guest,
-    topicHead: 'Walk-In Visitor'
+    topicHead: 'Walk-In Visitor',
+    ticketNum: `Ticket Num: ${tix}`
   })
 }
 
