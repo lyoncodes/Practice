@@ -29,7 +29,7 @@ app.use(parser.json())
 
 // Routes
 app.get('/', home)
-app.get('/', save)
+app.get('/guest/add', home)
 app.post('/guest/add', save)
 app.get('/*', errorFunction)
 
@@ -39,7 +39,7 @@ function home (req, res) {
    topicHead: `${appName}`
  })
 }
-let tix = 100;
+
 // POST route rendering functions
 function save (req, res) {
   let guest = {
@@ -51,9 +51,8 @@ function save (req, res) {
   }
   console.log(guest)
   res.render('index', {
+    topicHead: `${appName}`,
     userValue: guest,
-    topicHead: 'Walk-In Visitor',
-    ticketNum: `Ticket Num: ${tix}`
   })
 }
 
