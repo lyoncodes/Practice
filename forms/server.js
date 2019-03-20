@@ -29,7 +29,6 @@ app.use(parser.json())
 
 // Routes
 app.get('/', home)
-app.get('/guest/add', home)
 app.post('/guest/add', save)
 app.get('/*', errorFunction)
 
@@ -41,6 +40,13 @@ function home (req, res) {
 }
 
 // POST route rendering functions
+
+// Let's think about opening up a fresh route for db hits, instead of banging our heads against the syntax of ejs and other frameworks. Let's get it working along clear routes and then refactor for single page POST'ing
+
+// new button
+// button action to new route
+// function callback renders new page with formatted objects
+
 function save (req, res) {
   // create an object with the req.body (form data)
   let guest = {
@@ -56,6 +62,8 @@ function save (req, res) {
       userValue: guest,
     })
 }
+
+// Objects
 
 function errorFunction (req, res) {
   res.status(404).send('404 error')
