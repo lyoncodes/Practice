@@ -64,7 +64,13 @@ function save (req, res) {
 }
 
 // Objects
-
+function Guest (obj) {
+  this.first = obj.body.fname,
+  this.last = obj.body.lname,
+  this.fplan = obj.body.fplan,
+  this.moveIn = obj.body.moveIn,
+  this.price = obj.body.price
+}
 function errorFunction (req, res) {
   res.status(404).send('404 error')
 }
