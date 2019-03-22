@@ -4,6 +4,15 @@
   <%- include('../views/head.ejs'); %>
 </head>
 <body>
- <%= topicHead %>
- <%= userValue %>
+  <span>
+    <%= topicHead %>
+    <%= userValue.first %>
+    <%= userValue.last %>
+    <%= userValue.fplan %>
+    <%= userValue.moveIn %>
+    <%= userValue.price %>
+  </span>
+  <form name="form2" method="GET" action="/">
+    <input type="submit" value="Back to Entry">
+  </form>
 </body>
