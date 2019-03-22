@@ -57,7 +57,7 @@ function save (req, res) {
     price: req.body.price
   }
   console.log(guest)
-    res.render('index', {
+    res.render('saved', {
       topicHead: `${appName}`,
       userValue: guest,
     })
