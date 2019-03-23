@@ -29,7 +29,8 @@ app.use(parser.json())
 
 // Routes
 app.get('/', home)
-app.post('/guest/add', save)
+app.post('/guest/add', add)
+app.post('/guest/saved', save)
 app.get('/*', errorFunction)
 
 // GET route rendering functions
@@ -40,27 +41,21 @@ function home (req, res) {
 }
 
 // POST route rendering functions
-
-// Let's think about opening up a fresh route for db hits, instead of banging our heads against the syntax of ejs and other frameworks. Let's get it working along clear routes and then refactor for single page POST'ing
-
-// new button
-// button action to new route
-// function callback renders new page with formatted objects
-
-function save (req, res) {
-  // create an object with the req.body (form data)
+function add (req, res) {
   let guest = new Guest(req.body)
-  // let guest = {
-  //   first: req.body.fname,
-  //   last: req.body.lname,
-  //   fplan: req.body.fplan,
-  //   moveIn: req.body.moveIn,
-  //   price: req.body.price
-  // }
-  console.log(guest)
     res.render('saved', {
       topicHead: `${appName}`,
       userValue: guest,
+    })
+}
+
+function save (req, res) {
+  let SQL = `INSERT INTO guests (firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
+  let values = (SQL, [req.body.fname, req.body.lname, req.body.fplan, req.body.moveIn, req.body.price])
+
+  return client.query(SQL, values)
+    .then(result => {
+      res.redirect('saved')
     })
 }
 
