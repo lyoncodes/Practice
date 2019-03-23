@@ -43,19 +43,31 @@ function home (req, res) {
 // POST route rendering functions
 function add (req, res) {
   let guest = new Guest(req.body)
-    res.render('saved', {
-      topicHead: `${appName}`,
-      userValue: guest,
+  let SQL = `INSERT INTO guests(firstName, lastName, floorplan) VALUES ($1, $2, $3)`;
+  let values = (SQL, [guest.fname, guest.lname, guest.fplan])
+  return client.query(SQL, values)
+  .then(result => {
+    console.log(values)
+      res.render('saved', {
+        topicHead: `${appName}`,
+        userValue: guest,
+      })
     })
+    .catch(err => handleError(err, res))
 }
 
 function save (req, res) {
+  console.log(req)
   let SQL = `INSERT INTO guests (firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
   let values = (SQL, [req.body.fname, req.body.lname, req.body.fplan, req.body.moveIn, req.body.price])
 
   return client.query(SQL, values)
-    .then(result => {
-      res.redirect('saved')
+  .then(result => {
+    console.log(SQL)
+    console.log(values)
+      res.render('index', {
+        topicHead: `${appName}`,
+      })
     })
 }
 
@@ -71,8 +83,11 @@ function errorFunction (req, res) {
   res.status(404).send('404 error')
 }
 
-// Event Listener Functions
-
+// Error Handling Functions
+function handleError(err, res) {
+  console.log(err)
+  if (res) res.status(500).render('pages/error')
+}
 
 app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 )
