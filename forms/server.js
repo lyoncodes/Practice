@@ -49,13 +49,14 @@ function home (req, res) {
 
 function save (req, res) {
   // create an object with the req.body (form data)
-  let guest = {
-    first: req.body.fname,
-    last: req.body.lname,
-    fplan: req.body.fplan,
-    moveIn: req.body.moveIn,
-    price: req.body.price
-  }
+  let guest = new Guest(req.body)
+  // let guest = {
+  //   first: req.body.fname,
+  //   last: req.body.lname,
+  //   fplan: req.body.fplan,
+  //   moveIn: req.body.moveIn,
+  //   price: req.body.price
+  // }
   console.log(guest)
     res.render('saved', {
       topicHead: `${appName}`,
@@ -65,11 +66,11 @@ function save (req, res) {
 
 // Objects
 function Guest (obj) {
-  this.first = obj.body.fname,
-  this.last = obj.body.lname,
-  this.fplan = obj.body.fplan,
-  this.moveIn = obj.body.moveIn,
-  this.price = obj.body.price
+  this.fname = obj.fname,
+  this.lname = obj.lname,
+  this.fplan = obj.fplan,
+  this.moveIn = obj.moveIn,
+  this.price = obj.price
 }
 function errorFunction (req, res) {
   res.status(404).send('404 error')
