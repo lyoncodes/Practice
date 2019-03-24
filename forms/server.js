@@ -31,7 +31,7 @@ app.use(parser.json())
 // Routes
 app.get('/', home)
 app.post('/guest/add', addGuest)
-// app.post('/vendor/add', addVendor)
+app.post('/vendor/add', addVendor)
 app.get('/*', errorFunction)
 
 // GET route READ functions
@@ -59,9 +59,20 @@ function addGuest (req, res) {
   .catch(err => handleError(err, res))
 }
 
-// function addVendor (req, res) {
-//   let vendor = new Vendor(req.body)
-// }
+function addVendor (req, res) {
+  let vendor = new Vendor(req.body)
+  let SQL = `INSERT INTO vendors(company, firstName, lastName, job, serviceDate, notes) VALUES ($1, $2, $3, $4, $5, $6)`;
+  let values = (SQL, [vendor.company, vendor.firstName, vendor.lastName, vendor.job, vendor.serviceDate, vendor.notes])
+  console.log(values)
+  return client.query(SQL, values)
+    .then(result => {
+      res.render('saved', {
+        topicHead: `${appName}`,
+        userValue: vendor,
+      })
+    })
+  .catch(err => handleError(err, res))
+}
 
 // Operators
 function parseDate (obj) {
@@ -96,7 +107,7 @@ function errorFunction (req, res) {
 
 function handleError(err, res) {
   console.log(err)
-  if (res) res.status(500).render('pages/error')
+  if (res) res.status(500).render('error')
 }
 
 app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
@@ -114,5 +125,6 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
  *      * add method to convert company entry to lowercase
  *      * add method to parse phone #s for regex ease
  * 6. create db named "Visitors" w/ 2 tables: "Vendor" "Guest"
- * 6. write addVendor() function to INSERT vendor to db--type "vendor"! (ACP)
+ * 6. write addVendor() function to INSERT vendor to db! (ACP)
+ *      * write conditional expressions for rendering saved page
  */
