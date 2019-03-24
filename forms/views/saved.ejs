@@ -4,7 +4,12 @@
   <%- include('../views/head.ejs'); %>
 </head>
 <body>
-<%- include('../views/guestView.ejs'); %>
+  <% if(userValue.classification === 'vendor') { %>
+    <%- include('../views/vendorView') %>
+  <% } %>
+  <% if(userValue.classification === 'guest') { %>
+    <%- include('../views/guestView') %>
+  <% } %>
   <form name="form2" method="GET" action="/">
     <input type="submit" value="Back to Entry">
   </form>
