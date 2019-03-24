@@ -8,5 +8,6 @@ CREATE TABLE guests (
   firstName VARCHAR(255),
   lastName VARCHAR(255),
   floorplan VARCHAR(255),
+  moveIn VARCHAR(25),
   price NUMERIC(6,2)
 );

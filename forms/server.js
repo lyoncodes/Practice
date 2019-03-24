@@ -42,8 +42,8 @@ function home (req, res) {
 // POST route rendering functions
 function add (req, res) {
   let guest = new Guest(req.body)
-  let SQL = `INSERT INTO guests(firstName, lastName, floorplan, price) VALUES ($1, $2, $3, $4)`;
-  let values = (SQL, [guest.fname, guest.lname, guest.fplan, guest.price])
+  let SQL = `INSERT INTO guests(firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
+  let values = (SQL, [guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
   console.log(values)
   return client.query(SQL, values)
     .then(result => {
