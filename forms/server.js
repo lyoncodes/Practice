@@ -30,7 +30,6 @@ app.use(parser.json())
 // Routes
 app.get('/', home)
 app.post('/guest/add', add)
-app.post('/guest/saved', save)
 app.get('/*', errorFunction)
 
 // GET route rendering functions
@@ -43,28 +42,21 @@ function home (req, res) {
 // POST route rendering functions
 function add (req, res) {
   let guest = new Guest(req.body)
-  let SQL = `INSERT INTO guests(firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
-  let values = (SQL, [guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
+  let SQL = `INSERT INTO guests(firstName, lastName, floorplan, price) VALUES ($1, $2, $3, $4)`;
+  let values = (SQL, [guest.fname, guest.lname, guest.fplan, guest.price])
+  console.log(values)
   return client.query(SQL, values)
     .then(result => {
-      result.render('saved', {
+      res.render('saved', {
         topicHead: `${appName}`,
         userValue: guest,
       })
     })
   .catch(err => handleError(err, res))
 }
-
-function save (req, res) {
-  let SQL = `INSERT INTO guests (firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
-  let values = (SQL, [req.body.fname, req.body.lname, req.body.fplan, req.body.moveIn, req.body.price])
-
-  return client.query(SQL, values)
-  .then(result => {
-      res.render('index', {
-        topicHead: `${appName}`,
-      })
-    })
+// Operators
+function parseDate (obj) {
+  this.time = obj.moveIn.replace('-', '').replace('-', '')
 }
 
 // Objects
@@ -75,6 +67,8 @@ function Guest (obj) {
   this.moveIn = obj.moveIn,
   this.price = obj.price
 }
+
+
 
 // Error Handling Functions
 function errorFunction (req, res) {
