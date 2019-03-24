@@ -12,6 +12,7 @@ require('dotenv').config()
 // Build HTTP Server
 const app = express();
 const appName = "Day Today"
+let ticket = 0;
 
 //PORT
 const PORT = process.env.PORT || 3000;
@@ -29,18 +30,21 @@ app.use(parser.json())
 
 // Routes
 app.get('/', home)
-app.post('/guest/add', add)
+app.post('/guest/add', addGuest)
+// app.post('/vendor/add', addVendor)
 app.get('/*', errorFunction)
 
-// GET route rendering functions
+// GET route READ functions
 function home (req, res) {
- res.render('index', {
-   topicHead: `${appName}`
- })
+  res.render('index', {
+    topicHead: `${appName}`,
+    ticket: `${ticket}`
+  })
 }
 
-// POST route rendering functions
-function add (req, res) {
+// POST route UPDATE functions
+function addGuest (req, res) {
+  incrementTicket()
   let guest = new Guest(req.body)
   let SQL = `INSERT INTO guests(firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
   let values = (SQL, [guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
@@ -54,9 +58,17 @@ function add (req, res) {
     })
   .catch(err => handleError(err, res))
 }
+
+// function addVendor (req, res) {
+//   let vendor = new Vendor(req.body)
+// }
+
 // Operators
 function parseDate (obj) {
   this.time = obj.moveIn.replace('-', '').replace('-', '')
+}
+function incrementTicket () {
+  ticket++;
 }
 
 // Objects
@@ -68,7 +80,14 @@ function Guest (obj) {
   this.price = obj.price
 }
 
-
+function Vendor (obj) {
+  this.company = obj.company,
+  this.fname = obj.fname,
+  this.lname = obj.laname,
+  this.service = obj.service,
+  this.date = obj.serviceDate,
+  this.note = obj.note
+}
 
 // Error Handling Functions
 function errorFunction (req, res) {
@@ -82,3 +101,18 @@ function handleError(err, res) {
 
 app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 )
+
+
+
+/**TODO
+ * Broad Vision:
+ * addGuest() adds type "guest" to column "type"
+ * addVendor() adds type "vendor" to column "type"
+ * 4. build vendor POST route /vendor/add
+ * 5. create form with method="POST" action="vendor/route" to hold vendor information (ACP)
+ *      * include note field
+ *      * add method to convert company entry to lowercase
+ *      * add method to parse phone #s for regex ease
+ * 6. create db named "Visitors" w/ 2 tables: "Vendor" "Guest"
+ * 6. write addVendor() function to INSERT vendor to db--type "vendor"! (ACP)
+ */
