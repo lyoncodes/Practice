@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS guests;
 
 CREATE TABLE guests (
   id SERIAL PRIMARY KEY,
+  classification VARCHAR(255),
   firstName VARCHAR(255),
   lastName VARCHAR(255),
   floorplan VARCHAR(255),
@@ -16,6 +17,7 @@ DROP TABLE IF EXISTS vendors;
 
 CREATE TABLE vendors (
   id SERIAL PRIMARY KEY,
+  classification VARCHAR(255),
   company VARCHAR(255),
   firstName VARCHAR(255),
   lastName VARCHAR(255),

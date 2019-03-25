@@ -12,7 +12,8 @@ require('dotenv').config()
 // Build HTTP Server
 const app = express();
 const appName = "Day Today"
-let ticket = 0;
+let guestCount = 0;
+let vendorCount = 0;
 
 //PORT
 const PORT = process.env.PORT || 3000;
@@ -38,16 +39,17 @@ app.get('/*', errorFunction)
 function home (req, res) {
   res.render('index', {
     topicHead: `${appName}`,
-    ticket: `${ticket}`
+    ticket: `${guestCount}`,
+    vendorCount: `${vendorCount}`
   })
 }
 
 // POST route UPDATE functions
 function addGuest (req, res) {
-  incrementTicket()
+  increment(guestCount);
   let guest = new Guest(req.body)
-  let SQL = `INSERT INTO guests(firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5)`;
-  let values = (SQL, [guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
+  let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6)`;
+  let values = (SQL, [guest.classification, guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
   console.log(values)
   return client.query(SQL, values)
     .then(result => {
@@ -60,9 +62,10 @@ function addGuest (req, res) {
 }
 
 function addVendor (req, res) {
+  increment(vendorCount);
   let vendor = new Vendor(req.body)
-  let SQL = `INSERT INTO vendors(company, firstName, lastName, job, serviceDate, notes) VALUES ($1, $2, $3, $4, $5, $6)`;
-  let values = (SQL, [vendor.company, vendor.firstName, vendor.lastName, vendor.job, vendor.serviceDate, vendor.notes])
+  let SQL = `INSERT INTO vendors(classification, company, firstName, lastName, job, serviceDate, notes) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+  let values = (SQL, [vendor.classification, vendor.company, vendor.firstName, vendor.lastName, vendor.job, vendor.serviceDate, vendor.notes])
   console.log(values)
   return client.query(SQL, values)
     .then(result => {
@@ -78,12 +81,13 @@ function addVendor (req, res) {
 function parseDate (obj) {
   this.time = obj.moveIn.replace('-', '').replace('-', '')
 }
-function incrementTicket () {
-  ticket++;
+function increment (thing) {
+  return thing++;
 }
 
 // Objects
 function Guest (obj) {
+  this.classification = "guest"
   this.fname = obj.fname,
   this.lname = obj.lname,
   this.fplan = obj.fplan,
@@ -92,6 +96,7 @@ function Guest (obj) {
 }
 
 function Vendor (obj) {
+  this.classification = "vendor"
   this.company = obj.company,
   this.fname = obj.fname,
   this.lname = obj.laname,
