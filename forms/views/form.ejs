@@ -2,57 +2,27 @@
   <p class="message">Enter Guest Details Below</p>
   <input type="text" name="fname" placeholder="First Name"/>
   <input type="text" name="lname" placeholder="Last Name"/>
-  <p class="message">Studio</p>
-  <input type="checkbox" name="fplan" value="studio"/>
-  <p class="message">Open 1-Bedroom</p>
-  <input type="checkbox" name="fplan" value="open 1-br" />
-  <p class="message">1-Bedroom</p>
-  <input type="checkbox" name="fplan" value="1-bedroom">
-  <p class="message">1-Bedroom + Den</p>
-  <input type="checkbox" name="fplan" value="1-bedroom + den"/>
-  <p class="message">2-Bedroom</p>
-  <input type="checkbox" name="fplan" value="2-bedroom"/>
-  <p class="message">Penthouse</p>
-  <input type="checkbox" name="fplan" value="penthouse"/>
+
+  <input class="floor" id="check-box" type="checkbox" name="fplan" value="studio"/>
+  <label for="studio" class="message">Studio</p>
+
+  <input class="floor" id="check-box" type="checkbox" name="fplan" value="open 1-br" />
+  <label for="check-box" class="message">Open 1-Bedroom</p>
+
+  <input class="floor" id="check-box" type="checkbox" name="fplan" value="1-bedroom">
+  <label for="check-box" class="message">1-Bedroom</p>
+    
+  <input class="floor" id="check-box" type="checkbox" name="fplan" value="1-bedroom + den"/>
+  <label for="check-box" class="message">1-Bedroom + Den</p>
+
+  <input class="floor" id="check-box" type="checkbox" name="fplan" value="2-bedroom"/>
+  <label for="check-box" class="message">2-Bedroom</p>
+
+  <input class="floor" id="check-box" type="checkbox" name="fplan" value="penthouse"/>
+  <label for="check-box" class="message">Penthouse</p>
+
   <input type="date" name="moveIn" value="Move-in Date">
   <input type="number" name="price" min="1000.00" max="9999.00" step="500.00"/>
   <button type="submit" name="submit">create guest</button>
 </form>
 
- <!-- <table class="table">
-   <tr>
-   <td>First Name</td>
-   </tr>
-   <tr>
-    <td><input type="text" name="fname"></td>
-   </tr>
-   <tr>
-   <td>Last Name</td>
-   </tr>
-   <td><input type="text" name="lname"></td>
-   </tr>
-   <tr>
-   <td>Floor Plan</td>
-   </tr>
-   <td>
-    <select name="fplan">
-    <option>Studio</option>
-    <option>Open 1-Br</option>
-    <option>1-Bedroom</option>
-    <option>1-Bedroom + Den</option>
-    <option>2-Bedroom</option>
-    <option>Penthouse</option>
-   </select>
-  </td>
-  <tr>
-   <td>Move-In Date</td>
-  </tr>
-   <td><input type="date" name="moveIn"></td>
-  </tr>
-  <tr>
-   <td>Price Range</td>
-  </tr>
-   <td><input type="number" name="price"></td>
-  </tr>
-   <td colspan="2"><input type="submit" value="Save Guest"></td>
- </table> -->
