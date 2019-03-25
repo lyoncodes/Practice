@@ -1,27 +1,52 @@
-h1 {
- font-family: 'Press Start 2P', cursive;
- font-size: 16px;
- text-align: center
-}
 .container {
- width: 300px;
- min-height: 100vh;
- height: 100%;
- font-size: 8px;
- font-family: 'Press Start 2P', cursive;
- text-align: center;
- background: #fff;
- border: 3px solid black;
- margin: 0 auto;
- margin-top: 20px;
- padding: 20px;
+ width: 360px;
+ padding: 8% 0 0;
+ margin: auto
 }
 .form {
- padding: 25px;
- display: flex;
- flex-direction: column;
- margin: 50px
+ position: relative;
+ z-index: 1;
+ background: #ffffff;
+ max-width: 360px;
+ margin: 0 auto 100px;
+ padding: 45px;
+ text-align: center;
+ box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
-.table tr {
- line-height: 25px;
+ .form input {
+  font-family: "Roboto Mono", monospace;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
+ .form button {
+  font-family: "Roboto Mono", monospace;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+ }
+ .form button:hover,.form button:active,.form button:focus {
+  background: #43a047
+ }
+ .form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+  font-family: "Roboto Mono", monospace;
+ }
+ .guest-form .message {
+  font-family: "Roboto Mono", monospace;
+ }
