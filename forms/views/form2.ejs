@@ -1,43 +1,67 @@
-<form name="vendor-form" method="POST" action="/vendor/add">
- <table class="table">
-   <tr>
-   <td>Company</td>
-   </tr>
-   <tr>
-    <td><input type="text" name="company"></td>
-   </tr>
-   <tr>
-   <td>First Name</td>
-   </tr>
-   <td><input type="text" name="fname"></td>
-   </tr>
-   <tr>
-    <td>Last Name</td>
-   </tr>
-    <td><input type="text" name="lname"></td>
-   </tr>
-   <tr>
-   <td>Service Performed</td>
-   </tr>
-   <td>
-    <select name="service">
-    <option>Delivery/Moving Service</option>
-    <option>Appliance Repair</option>
-    <option>Landscaping</option>
-    <option>HVAC</option>
-    <option>Pest Control</option>
-   </select>
-  </td>
-  <tr>
-   <td>Date</td>
-  </tr>
-   <td><input type="date" name="serviceDate"></td>
-  </tr>
-  <tr>
-   <td>Notes</td>
-  </tr>
-   <td><input type="text" name="note"></td>
-  </tr>
-   <td colspan="2"><input type="submit" value="Save Vendor"></td>
- </table>
+<form name="vendor-form" class="guest-form" method="POST" action="/vendor/add">
+<p class="message">Vendor Appointment<br>
+<p class="message">Enter Vendor Details Below</p><br>
+<input type="text" name="company" placeholder="Company"/>
+<input type="text" name="fname" placeholder="First Name"/>
+<input type="text" name="lname" placeholder="Last Name"/>
+<div id="guest-checkbox">
+  <input class="floor" id="check-box" type="checkbox">
+  <label for="check-box" class="message">Delivery/Drop Off</label>
+  <input class="floor" id="check-box" type="checkbox">
+  <label for="check-box" class="message">Janitorial</label><br>
+  <input class="floor" id="check-box" type="checkbox">
+  <label for="check-box" class="message">Flooring/Carpet</label>
+  <input class="floor" id="check-box" type="checkbox">
+  <label for="check-box" class="message">HVAC</label><br>
+  <input class="floor" id="check-box" type="checkbox">
+  <label for="check-box" class="message">Landscaping</label>
+  <input class="floor" id="check-box" type="checkbox">
+  <label for="check-box" class="message">Pest Control</label>
+</div>
+
+<input type="date" name="appointment" value="appointment-date">
+<button type="submit" name="submit">create vendor</button>
 </form>
+
+
+   <!-- <table class="table">
+     <tr>
+     <td>Company</td>
+     </tr>
+     <tr>
+      <td><input type="text" name="company"></td>
+     </tr>
+     <tr>
+     <td>First Name</td>
+     </tr>
+     <td><input type="text" name="fname"></td>
+     </tr>
+     <tr>
+      <td>Last Name</td>
+     </tr>
+      <td><input type="text" name="lname"></td>
+     </tr>
+     <tr>
+     <td>Service Performed</td>
+     </tr>
+     <td>
+      <select name="service">
+      <option>Delivery/Moving Service</option>
+      <option>Appliance Repair</option>
+      <option>Landscaping</option>
+      <option>HVAC</option>
+      <option>Pest Control</option>
+     </select>
+    </td>
+    <tr>
+     <td>Date</td>
+    </tr>
+     <td><input type="date" name="serviceDate"></td>
+    </tr>
+    <tr>
+     <td>Notes</td>
+    </tr>
+     <td><input type="text" name="note"></td>
+    </tr>
+     <td colspan="2"><input type="submit" value="Save Vendor"></td>
+   </table> -->
