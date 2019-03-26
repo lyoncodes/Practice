@@ -24,6 +24,9 @@ h2 {
  text-align: center;
  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+.form .vendor-div {
+  display: none;
+}
 #guest-checkbox {
  display: inline-block;
 }
@@ -64,6 +67,9 @@ h2 {
   color: #b3b3b3;
   font-size: 12px;
   font-family: "Roboto Mono", monospace;
+ }
+ .form .message a {
+   color: #43a050;
  }
  .guest-form .message {
   font-family: "Roboto Mono", monospace;

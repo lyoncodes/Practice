@@ -1,28 +1,30 @@
-<form name="guest-form" class="guest-form" method="POST" action="/guest/add">
-  <p class="message">Walk-In Guest<br>
-    Guest #: <%= ticket %><br>
-  <p class="message">Enter Guest Details Below</p><br>
-  <input type="text" name="fname" placeholder="First Name"/>
-  <input type="text" name="lname" placeholder="Last Name"/>
-  <div id="guest-checkbox">
-    <input class="floor" id="check-box" type="checkbox" name="fplan" value="studio"/>
-    <label for="check-box" class="message">Studio
+<div class="guest-div">
+  <form name="guest-form" class="guest-form" method="POST" action="/guest/add">
+    <p class="message">Walk-In Guest / <a href="#">Vendor Form</a><br>
+      Guest #: <%= ticket %><br>
+    <p class="message">Enter Guest Details Below</p><br>
+    <input type="text" name="fname" placeholder="First Name"/>
+    <input type="text" name="lname" placeholder="Last Name"/>
+    <div id="guest-checkbox">
+      <input class="floor" id="check-box" type="checkbox" name="fplan" value="studio"/>
+      <label for="check-box" class="message">Studio
+    
+      <input class="floor" id="check-box" type="checkbox" name="fplan" value="open 1-br" />
+      <label for="check-box" class="message">Open 1-BR
+    
+      <input class="floor" id="check-box" type="checkbox" name="fplan" value="1-bedroom">
+      <label for="check-box" class="message">1-Bedroom
+        
+      <input class="floor" id="check-box" type="checkbox" name="fplan" value="1-bedroom + den"/>
+      <label for="check-box" class="message">1-Bedroom + Den
+    
+      <input class="floor" id="check-box" type="checkbox" name="fplan" value="2-bedroom"/>
+      <label for="check-box" class="message">2-Bedroom
+    </div>
   
-    <input class="floor" id="check-box" type="checkbox" name="fplan" value="open 1-br" />
-    <label for="check-box" class="message">Open 1-BR
-  
-    <input class="floor" id="check-box" type="checkbox" name="fplan" value="1-bedroom">
-    <label for="check-box" class="message">1-Bedroom
-      
-    <input class="floor" id="check-box" type="checkbox" name="fplan" value="1-bedroom + den"/>
-    <label for="check-box" class="message">1-Bedroom + Den
-  
-    <input class="floor" id="check-box" type="checkbox" name="fplan" value="2-bedroom"/>
-    <label for="check-box" class="message">2-Bedroom
-  </div>
-
-  <input type="date" name="moveIn" value="Move-in Date">
-  <input type="number" name="price" placeholder="Price Range"min="1000.00" max="9999.00" step="500.00"/>
-  <button type="submit" name="submit">create guest</button>
-</form>
+    <input type="date" name="moveIn" value="Move-in Date">
+    <input type="number" name="price" placeholder="Price Range"min="1000.00" max="9999.00" step="500.00"/>
+    <button type="submit" name="submit">create guest</button>
+  </form>
+</div>
 
