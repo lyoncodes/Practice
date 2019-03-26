@@ -1,8 +1,14 @@
 <span>
- <%= topicHead %>
- <%= userValue.fname %>
- <%= userValue.lname %>
- <%= userValue.fplan %>
- <%= userValue.moveIn %>
- <%= userValue.price %>
+ <div class="form">
+  <h1>Added to Day Today</h1>
+  <p class="message">
+   <%= userValue.fname %> <%= userValue.lname %><br>
+   <%= userValue.fplan %><br>
+   <%= userValue.moveIn %><br>
+   <%= userValue.price %><br>
+  </p><br>
+  <form name="form2" method="GET" action="/">
+   <button type="submit" name="submit">Back to Forms</button>
+  </form>
+ </div>
 </span>
