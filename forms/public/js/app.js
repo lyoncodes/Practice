@@ -1,5 +1,9 @@
 'use strict';
 
 $('.message a').click(function() {
- $('.vendor-div').show()
+ $('.vendor-div').toggle('display')
 });
+
+$('button').click(function() {
+ $('.saved-entry').show()
+})

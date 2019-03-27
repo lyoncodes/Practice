@@ -12,9 +12,6 @@ require('dotenv').config()
 // Build HTTP Server
 const app = express();
 const appName = "Day Today"
-let guestCount = 0;
-let vendorCount = 0;
-
 //PORT
 const PORT = process.env.PORT || 3000;
 
@@ -39,8 +36,6 @@ app.get('/*', errorFunction)
 function home (req, res) {
   res.render('index', {
     topicHead: `${appName}`,
-    ticket: `${guestCount}`,
-    vendorCount: `${vendorCount}`
   })
 }
 
@@ -52,16 +47,15 @@ function addGuest (req, res) {
   console.log(values)
   return client.query(SQL, values)
     .then(result => {
-      res.render('saved', {
+      res.render('index', {
         topicHead: `${appName}`,
-        userValue: guest,
+        userValue: guest
       })
     })
   .catch(err => handleError(err, res))
 }
 
 function addVendor (req, res) {
-  increment(vendorCount);
   let vendor = new Vendor(req.body)
   let SQL = `INSERT INTO vendors(classification, company, firstName, lastName, job, serviceDate, notes) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
   let values = (SQL, [vendor.classification, vendor.company, vendor.firstName, vendor.lastName, vendor.job, vendor.serviceDate, vendor.notes])
@@ -77,9 +71,6 @@ function addVendor (req, res) {
 }
 
 // Operators
-function parseDate (obj) {
-  this.time = obj.moveIn.replace('-', '').replace('-', '')
-}
 function increment (thing) {
   return thing++;
 }
@@ -120,8 +111,14 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 
 
 /**TODO
- * Broad Vision:
- *      * include note field
- *      * add method to convert company entry to lowercase
- *      * add method to parse phone #s for regex ease
+ * Note Field for Vendors
+      * include note field
+ * Pop Up for db entries
+ * Create <div> class "saved-entry" for holding saved.ejs
+ * conditional expression for rendering
+      * .hide(), .show() ejs file for saved guests
+      * 
+ * Form Validation
+      * add method to convert company entry to lowercase
+      * add method to parse phone #s for regex ease
  */
