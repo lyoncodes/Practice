@@ -74,3 +74,6 @@ h2 {
  .guest-form .message {
   font-family: "Roboto Mono", monospace;
  }
+ .saved-entry {
+   display: none;
+ }
