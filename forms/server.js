@@ -38,6 +38,7 @@ function home (req, res) {
   let SQL = 'SELECT * FROM guests'
   return client.query(SQL)
     .then(data => {
+      console.log(data.rows)
       res.render('index', {
         topicHead: `${appName}`,
         guests: data.rows
@@ -54,8 +55,6 @@ function addGuest (req, res) {
   let guest = new Guest(req.body)
   let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6)`;
   let values = (SQL, [guest.classification, guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
-  console.log(values)
-  console.log(guest)
   return client.query(SQL, values)
     .then(result => {
       res.render('saved', {
