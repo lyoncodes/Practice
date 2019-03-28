@@ -10,9 +10,12 @@ h2 {
 }
 
 .container {
- width: 360px;
- padding: 8% 0 0;
- margin: auto
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto
+}
+p .message {
+  margin-bottom: 14px;
 }
 .form {
  position: relative;
@@ -63,12 +66,12 @@ h2 {
   background: #43a047
  }
  .form .message {
-  margin: 5px 0 0;
+  margin: 5px 0 3px;
   color: #b3b3b3;
   font-size: 12px;
   font-family: "Roboto Mono", monospace;
  }
- .form .message a {
+ #vendor-a {
    color: #43a050;
  }
  .guest-form .message {

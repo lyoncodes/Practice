@@ -3,6 +3,7 @@
 
 DROP TABLE IF EXISTS guests;
 
+
 CREATE TABLE guests (
   id SERIAL PRIMARY KEY,
   classification VARCHAR(255),
@@ -12,6 +13,12 @@ CREATE TABLE guests (
   moveIn VARCHAR(25),
   price NUMERIC(6,2)
 );
+
+INSERT INTO guests (classification, firstName, lastName, floorplan, moveIn, price) values ('guests', 'Thomas', 'Jefferson', 'Studio', '2019-04', '2400.00');
+INSERT INTO guests (classification, firstName, lastName, floorplan, moveIn, price) values ('guests', 'John', 'Adams', '1-Bedroom', '2019-05', '2400.00');
+INSERT INTO guests (classification, firstName, lastName, floorplan, moveIn, price) values ('guests', 'George', 'Washington', 'Studio', '2019-06', '1200.00');
+INSERT INTO guests (classification, firstName, lastName, floorplan, moveIn, price) values ('guests', 'Benjamin', 'Franklin', 'Studio', '2019-07', '2400.00');
+INSERT INTO guests (classification, firstName, lastName, floorplan, moveIn, price) values ('guests', 'William', 'Madison', '2-Bedroom', '2019-08', '2400.00');
 
 DROP TABLE IF EXISTS vendors;
 

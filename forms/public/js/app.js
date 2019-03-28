@@ -1,6 +1,6 @@
 'use strict';
 
-$('.message a').click(function() {
+$('#vendor-a').click(function() {
  $('.vendor-div').toggle('display')
 });
 
