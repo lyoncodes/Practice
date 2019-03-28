@@ -22,7 +22,7 @@ app.use(express.static('./public'))
 
 //Error Handling
 function handleError (res) {
- res.status(404).send('404 error')
+ res.status(400).send('400 error')
 }
 
 // Routes
@@ -36,14 +36,18 @@ function home (req, res) {
 
 function getPlayer (req, res) {
  let query = `${req.body.firstname} ${req.body.lastname}`
- let searchStr = query.toLowerCase() // lebron james
+ query = query.toLowerCase();
  res.render('show')
  return searchPlayer(query)
 }
 
-function searchPlayer (player) {
- const search = NBA.findPlayer(player)
- console.log(search)
+function searchPlayer (searchStr) {
+ const Player = NBA.findPlayer(searchStr)
+ const Stats = NBA.stats.playerInfo({PlayerID: Player.playerId})
+ .then (console.log)
+
+ console.log(Player)
+ console.log(Stats)
 }
 
 // getPlayer() formats query for searchPlayer()
