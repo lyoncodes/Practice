@@ -12,6 +12,7 @@ require('dotenv').config()
 // Build HTTP Server
 const app = express();
 const appName = "Day Today"
+
 //PORT
 const PORT = process.env.PORT || 3000;
 
@@ -34,10 +35,19 @@ app.get('/*', errorFunction)
 
 // GET route READ functions
 function home (req, res) {
-  res.render('index', {
-    topicHead: `${appName}`,
+  let SQL = 'SELECT * FROM guests'
+  return client.query(SQL)
+    .then(data => {
+      res.render('index', {
+        topicHead: `${appName}`,
+        guests: data.rows
+    })
   })
 }
+
+// function searchGuests (req, res) {
+//   // let SQL = "SELECT * FROM guests WHERE {req.body."
+// }
 
 // POST route UPDATE functions
 function addGuest (req, res) {
@@ -45,9 +55,10 @@ function addGuest (req, res) {
   let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6)`;
   let values = (SQL, [guest.classification, guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
   console.log(values)
+  console.log(guest)
   return client.query(SQL, values)
     .then(result => {
-      res.render('index', {
+      res.render('saved', {
         topicHead: `${appName}`,
         userValue: guest
       })

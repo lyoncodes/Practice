@@ -1,8 +1,8 @@
 <div class="guest-div">
   <form name="guest-form" class="guest-form" method="POST" action="/guest/add">
     <p class="message">Walk-In Guest / <a href="#">Vendor Form</a><br>
-    <input type="text" name="fname" placeholder="First Name"/>
-    <input type="text" name="lname" placeholder="Last Name"/>
+    <input type="text" name="fname" placeholder="First Name" value="Harry"/>
+    <input type="text" name="lname" placeholder="Last Name" value="Cary"/>
     <div id="guest-checkbox">
       <input class="floor" id="check-box" type="checkbox" name="fplan" value="studio"/>
       <label for="check-box" class="message">Studio
@@ -20,13 +20,9 @@
       <label for="check-box" class="message">2-Bedroom
     </div>
   
-    <input type="date" name="moveIn" value="Move-in Date">
-    <input type="number" name="price" placeholder="Price Range"min="1000.00" max="9999.00" step="10.00"/>
+    <input type="date" name="moveIn" value="Move-in Date"/>
+    <input type="number" name="price" placeholder="Price Range"min="1000.00" max="9999.00" step="10.00" value="1000.00"/>
     <button type="submit" name="submit">create guest</button>
   </form>
-
-  <div class="saved-entry">
-    <h1> This is Div </h1>
-  </div>
 </div>
 
