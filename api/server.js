@@ -43,11 +43,11 @@ function getPlayer (req, res) {
 
 function searchPlayer (searchStr) {
  const Player = NBA.findPlayer(searchStr)
- const Stats = NBA.stats.playerInfo({PlayerID: Player.playerId})
- .then (console.log)
-
- console.log(Player)
- console.log(Stats)
+ NBA.stats.playerInfo({ PlayerID: Player.playerId })
+ .then (result => {
+  let college = result.commonPlayerInfo[0].school
+  console.log(college)
+ })
 }
 
 // getPlayer() formats query for searchPlayer()
