@@ -35,20 +35,22 @@ function home (req, res) {
 }
 
 function getPlayer (req, res) {
- console.log(req.body)
+ let query = `${req.body.firstname} ${req.body.lastname}`
+ let searchStr = query.toLowerCase() // lebron james
  res.render('show')
+ return searchPlayer(query)
 }
 
-function searchPlayer (query) {
+function searchPlayer (player) {
+ const search = NBA.findPlayer(player)
+ console.log(search)
 }
 
 // getPlayer() formats query for searchPlayer()
 // create Player object for basic return properties
 // crete a searchPlayer() function that instantiates Player
-// Objects
 
-const curry = NBA.findPlayer('Stephen Curry');
-console.log(curry);
+// Objects
 
 // Listen
 app.listen(PORT, () => {
