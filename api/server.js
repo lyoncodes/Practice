@@ -27,17 +27,34 @@ function handleError (res) {
 
 // Routes
 app.get('/', home)
-app.post('/player/search', getPlayer)
+app.post('/player/search', search)
 
 // GET functions
 function home (req, res) {
  res.render('index')
 }
 
-function getPlayer (req, res) {
+function search (req, res) {
  let query = `${req.body.firstname} ${req.body.lastname}`
  query = query.toLowerCase();
- res.render('show')
+ const player = NBA.findPlayer(query)
+ 
+ NBA.stats.playerInfo({ PlayerID: player.playerId })
+ .then (result => {
+  let newPlayer = new Player(result)
+  console.log(newPlayer)
+  
+  NBA.stats.playerSplits({ PlayerID: player.playerId })
+  .then (result => {
+   let newPlayerSplits = new PlayerSplits(result)
+   console.log(newPlayerSplits)
+   
+   res.render('show', {
+    newPlayer: `${newPlayer}`, 
+    newPlayerSplits: `${newPlayerSplits}`
+   })
+  })
+ })
  return searchPlayer(query)
 }
 
@@ -51,6 +68,7 @@ function searchPlayer (searchStr) {
  })
 
  NBA.stats.playerSplits({ PlayerID: player.playerId })
+
  .then (result => {
   let newPlayerSplits = new PlayerSplits(result)
   console.log(newPlayerSplits)
