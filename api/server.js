@@ -51,8 +51,8 @@ function searchPlayer (searchStr) {
  NBA.stats.playerSplits({ PlayerID: player.playerId })
  .then (result => {
   console.log(result)
-  // let newPlayerStats = new PlayerStats(result)
-  // console.log(newPlayerStats)
+  let newPlayerStats = new PlayerStats(result)
+  console.log(newPlayerStats)
  })
 }
 
@@ -66,6 +66,12 @@ function Player (obj) {
  this.draftRound = obj.commonPlayerInfo[0].draftRound;
  this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
  this.college = obj.commonPlayerInfo[0].school;
+}
+
+function PlayerStats (obj) {
+ this.mpg = obj.overallPlayerDashboard[0].min;
+ this.fgPct = obj.overallPlayerDashboard[0].fgPct;
+ this.fg3Pct = obj.overallPlayerDashboard[0].fg3Pct
 }
 
 // Listen
