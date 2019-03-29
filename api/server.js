@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000
 
 // Set the view engine
 app.set('view engine', 'ejs')
-app.use(parser.urlencoded({ extended: false }))
+app.use(parser.urlencoded({ extended: true }))
 app.use(express.static('./public'))
 
 //Error Handling
@@ -34,52 +34,36 @@ function home (req, res) {
  res.render('index')
 }
 
+// search & POST functions
 function search (req, res) {
- let query = `${req.body.firstname} ${req.body.lastname}`
- query = query.toLowerCase();
- const player = NBA.findPlayer(query)
+  let query = `${req.body.firstname} ${req.body.lastname}`
+  query = query.toLowerCase();
+  const player = NBA.findPlayer(query)
  
- NBA.stats.playerInfo({ PlayerID: player.playerId })
- .then (result => {
-  let newPlayer = new Player(result)
-  console.log(newPlayer)
+  NBA.stats.playerInfo({ PlayerID: player.playerId })
+   .then (result => {
+     let newPlayer = new Player(result)
+     console.log(newPlayer)
   
-  NBA.stats.playerSplits({ PlayerID: player.playerId })
-  .then (result => {
-   let newPlayerSplits = new PlayerSplits(result)
-   console.log(newPlayerSplits)
-   
-   res.render('show', {
-    newPlayer: `${newPlayer}`, 
-    newPlayerSplits: `${newPlayerSplits}`
-   })
-  })
- })
- return searchPlayer(query)
+    NBA.stats.playerSplits({ PlayerID: player.playerId })
+      .then (result => {
+        let newPlayerSplits = new PlayerSplits(result)
+        console.log(newPlayerSplits)
+  
+      res.render('show', {newPlayer, newPlayerSplits})
+      })
+    })
 }
 
-function searchPlayer (searchStr) {
- const player = NBA.findPlayer(searchStr)
- NBA.stats.playerInfo({ PlayerID: player.playerId })
-
- .then (result => {
-  let newPlayer = new Player(result)
-  console.log(newPlayer)
- })
-
- NBA.stats.playerSplits({ PlayerID: player.playerId })
-
- .then (result => {
-  let newPlayerSplits = new PlayerSplits(result)
-  console.log(newPlayerSplits)
- })
-}
 
 // Objects
 function Player (obj) {
  this.id = obj.commonPlayerInfo[0].personId;
  this.name = obj.commonPlayerInfo[0].displayFirstLast;
  this.position = obj.commonPlayerInfo[0].position;
+ this.height = obj.commonPlayerInfo[0].height;
+ this.weight = obj.commonPlayerInfo[0].weight;
+ this.jersey = obj.commonPlayerInfo[0].jersey;
  this.team = obj.commonPlayerInfo[0].teamName;
  this.draftYear = obj.commonPlayerInfo[0].draftYear;
  this.draftRound = obj.commonPlayerInfo[0].draftRound;

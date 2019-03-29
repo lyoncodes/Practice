@@ -4,7 +4,14 @@
   <%- include('../views/head.ejs'); %>
 </head>
 <body>
- <%= newPlayer %>
- <%= newPlayerSplits %>
+ <div>
+  <h1><%= newPlayer.name %></h1>
+  <p><%= newPlayer.team %>  #<%= newPlayer.jersey %> <%= newPlayer.position %></p>
+  <p><%= newPlayer.height %>, <%= newPlayer.weight %></p>
+ </div>
+ <div class="stats">
+  <p>drafted: <%= newPlayer.draftYear %> from: <%= newPlayer.college %></p>
+  <p> games played: <%= newPlayerSplits.gp %></p>
+ </div>
 </body>
 </html>
