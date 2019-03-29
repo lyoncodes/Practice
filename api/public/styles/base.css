@@ -1,5 +1,23 @@
+body{
+ background: #000000;
+ font-family: Arial, Helvetica, sans-serif;
+ color: #41B6E6;
+}
+section{
+ margin:50px
+}
+.search-form{
+ position: relative;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 10em;
+ background: #41B6E6;
+}
 table{
  width: 100%;
+ padding-left: 12px!important;
+ padding-right: 12px!important;
  table-layout: fixed;
 }
 .tbl-header{
