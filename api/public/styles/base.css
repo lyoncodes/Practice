@@ -6,6 +6,10 @@ body{
 section{
  margin:50px
 }
+a{
+ color: #41B6E6;
+
+}
 .search-form{
  position: relative;
  display: flex;
@@ -14,6 +18,8 @@ section{
  height: 10em;
  background: #41B6E6;
 }
+
+/* Table Styling */
 table{
  width: 100%;
  padding-left: 12px!important;
@@ -24,7 +30,6 @@ table{
  background-color: rgba(255,255,255,0.3);
 }
 .tbl-content{
- height: 300px;
  overflow-x: auto;
  margin-top: 0px;
  border: 1px solid rgba(255,255,255,0.3);

@@ -49,10 +49,16 @@ function search (req, res) {
       .then (result => {
         let newPlayerSplits = new PlayerSplits(result)
         console.log(newPlayerSplits)
-  
+        
+      NBA.stats.playerSplits({ PlayerID: player.playerId, Season: "2015-16" })
+        .then (result => {
+          let newPlayerSeasonSplits = new PlayerSplits(result)
+          console.log(newPlayerSeasonSplits)
+        })
+
       res.render('show', {newPlayer, newPlayerSplits})
       })
-    })
+   })
 }
 
 
@@ -65,6 +71,8 @@ function Player (obj) {
  this.weight = obj.commonPlayerInfo[0].weight;
  this.jersey = obj.commonPlayerInfo[0].jersey;
  this.team = obj.commonPlayerInfo[0].teamName;
+ this.fromYear = obj.commonPlayerInfo[0].fromYear;
+ this.toYear = obj.commonPlayerInfo[0].toYear;
  this.draftYear = obj.commonPlayerInfo[0].draftYear;
  this.draftRound = obj.commonPlayerInfo[0].draftRound;
  this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
@@ -72,6 +80,7 @@ function Player (obj) {
 }
 
 function PlayerSplits (obj) {
+ this.season = obj.overallPlayerDashboard[0].groupValue;
  this.gp = obj.overallPlayerDashboard[0].gp;
  this.mpg = obj.overallPlayerDashboard[0].min;
  this.fgPct = obj.overallPlayerDashboard[0].fgPct;
@@ -92,3 +101,16 @@ function PlayerSplits (obj) {
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
 })
+
+/* TODO:
+
+// TASKS
+
+// FEATURES
+* Add Comparison Analytics
+  * Player Career Stats
+    1. Request different season than current
+    2. Request all seasons until current
+    * Render All Seasons to Table
+  * Advaned Analytics -- SynergyTeamsPlayTypeStats
+*/
