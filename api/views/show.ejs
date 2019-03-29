@@ -6,6 +6,7 @@
 <body>
  <div>
   <h1><%= newPlayer.name %></h1>
+  <a href="/">Back to Search</a>
   <p><%= newPlayer.team %>  #<%= newPlayer.jersey %> <%= newPlayer.position %></p>
   <p><%= newPlayer.height %>, <%= newPlayer.weight %></p>
  </div>
@@ -28,6 +29,7 @@
      <th>Stl</th>
      <th>TO</th>
      <th>PPG</th>
+     <th>+/-</th>
      </tr>
    </thead>
   </table>
@@ -47,6 +49,7 @@
      <td><%= newPlayerSplits.stl %></td>
      <td><%= newPlayerSplits.to %></td>
      <td><%= newPlayerSplits.ppg %></td>
+     <td><%= newPlayerSplits.plusMinus %></td>
     </tr>
    </tbody>
   </table>
