@@ -11,7 +11,27 @@
  </div>
  <div class="stats">
   <p>drafted: <%= newPlayer.draftYear %> from: <%= newPlayer.college %></p>
-  <p> games played: <%= newPlayerSplits.gp %></p>
  </div>
+
+ <div class="tbl-header">
+  <table cellpadding="0" cellspacing="0" border="0">
+   <thead>
+    <tr>
+     <th>GP</th>
+     <th>MPG</th>
+     <th>FG%</th>
+     <th>3P%</th>
+     <th>FT%</th>
+     <th>REB</th>
+     <th>oREB</th>
+     <th>Ast</th>
+     <th>Stl</th>
+     </tr>
+   </thead>
+  </table>
+ </div>
+ <p> <%= newPlayerSplits.gp %></p>
+
+
 </body>
 </html>
