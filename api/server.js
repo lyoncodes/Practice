@@ -44,15 +44,16 @@ function getPlayer (req, res) {
 function searchPlayer (searchStr) {
  const player = NBA.findPlayer(searchStr)
  NBA.stats.playerInfo({ PlayerID: player.playerId })
+
  .then (result => {
   let newPlayer = new Player(result)
   console.log(newPlayer)
  })
+
  NBA.stats.playerSplits({ PlayerID: player.playerId })
  .then (result => {
-  console.log(result)
-  // let newPlayerStats = new PlayerStats(result)
-  // console.log(newPlayerStats)
+  let newPlayerSplits = new PlayerSplits(result)
+  console.log(newPlayerSplits)
  })
 }
 
@@ -66,6 +67,23 @@ function Player (obj) {
  this.draftRound = obj.commonPlayerInfo[0].draftRound;
  this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
  this.college = obj.commonPlayerInfo[0].school;
+}
+
+function PlayerSplits (obj) {
+ this.gp = obj.overallPlayerDashboard[0].gp;
+ this.mpg = obj.overallPlayerDashboard[0].min;
+ this.fgPct = obj.overallPlayerDashboard[0].fgPct;
+ this.fg3Pct = obj.overallPlayerDashboard[0].fg3Pct;
+ this.ftpct = obj.overallPlayerDashboard[0].ftPct;
+ this.reb = obj.overallPlayerDashboard[0].dreb;
+ this.oreb = obj.overallPlayerDashboard[0].oreb;
+ this.ast = obj.overallPlayerDashboard[0].ast;
+ this.blk = obj.overallPlayerDashboard[0].blk;
+ this.stl = obj.overallPlayerDashboard[0].stl;
+ this.to = obj.overallPlayerDashboard[0].tov;
+ this.pf = obj.overallPlayerDashboard[0].pf;
+ this.ppg = obj.overallPlayerDashboard[0].pts;
+ this.plusMinus = obj.overallPlayerDashboard[0].plusMinus
 }
 
 // Listen
