@@ -56,7 +56,7 @@ function search (req, res) {
 }
 
 
-// Objects
+// Objects  
 function Player (obj) {
  this.id = obj.commonPlayerInfo[0].personId;
  this.name = obj.commonPlayerInfo[0].displayFirstLast;
