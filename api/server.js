@@ -50,18 +50,17 @@ function search (req, res) {
         let newPlayerSplits = new PlayerSplits(result)
         console.log(newPlayerSplits)
         
-      NBA.stats.playerSplits({ PlayerID: player.playerId, Season: "2015-16" })
+      NBA.stats.playerSplits({ PlayerID: player.playerId, Season: "2017-18" })
         .then (result => {
+          console.log(result)
           let newPlayerSeasonSplits = new PlayerSplits(result)
           console.log(newPlayerSeasonSplits)
-        })
 
-      res.render('show', {newPlayer, newPlayerSplits})
+          res.render('show', {newPlayer, newPlayerSplits, newPlayerSeasonSplits})
+        })
       })
    })
 }
-
-
 // Objects  
 function Player (obj) {
  this.id = obj.commonPlayerInfo[0].personId;
