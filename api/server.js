@@ -94,18 +94,19 @@ function PlayerSplits (obj) {
 }
 
 function PlayerCareerSplits (obj) {
+  this.gp = obj.careerTotalsRegularSeason[0].gp;
   this.mpg = obj.careerTotalsRegularSeason[0].min;
-  // this.fgPct
-  // this.fg3Pct
-  // this.ftPct
-  // this.reb
-  // this.oreb
-  // this.ast
-  // this.blk
-  // this.stl
-  // this.to
-  // this.pf
-  // this.ppg
+  this.fgPct = obj.careerTotalsRegularSeason[0].fgPct;
+  this.fg3Pct = obj.careerTotalsRegularSeason[0].fg3Pct;
+  this.ftPct = obj.careerTotalsRegularSeason[0].ftPct;
+  this.reb = obj.careerTotalsRegularSeason[0].reb;
+  this.oreb = obj.careerTotalsRegularSeason[0].oreb;
+  this.ast = obj.careerTotalsRegularSeason[0].ast;
+  this.blk = obj.careerTotalsRegularSeason[0].blk;
+  this.stl = obj.careerTotalsRegularSeason[0].stl;
+  this.to = obj.careerTotalsRegularSeason[0].tov;
+  this.pf = obj.careerTotalsRegularSeason[0].pf;
+  this.ppg = obj.careerTotalsRegularSeason[0].pts
 }
 // Listen
 app.listen(PORT, () => {
