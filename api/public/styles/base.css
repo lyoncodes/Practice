@@ -34,6 +34,7 @@ table{
  margin-top: 0px;
  border: 1px solid rgba(255,255,255,0.3);
 }
+
 th{
  padding: 20px 15px;
  text-align: left;
@@ -44,7 +45,7 @@ th{
 }
 td{
  padding: 15px;
- text-align: left;
+ text-align: center;
  vertical-align: middle;
  font-weight: 300;
  font-size: 12px;
