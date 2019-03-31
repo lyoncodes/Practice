@@ -29,6 +29,7 @@ function handleError (res) {
 app.get('/', home)
 app.post('/player/search', search)
 
+
 // GET functions
 function home (req, res) {
  res.render('index')
@@ -43,23 +44,19 @@ function search (req, res) {
   NBA.stats.playerInfo({ PlayerID: player.playerId })
    .then (result => {
      let newPlayer = new Player(result)
-     console.log(newPlayer)
   
     NBA.stats.playerSplits({ PlayerID: player.playerId })
       .then (result => {
         let newPlayerSplits = new PlayerSplits(result)
-        console.log(newPlayerSplits)
         
-      NBA.stats.playerSplits({ PlayerID: player.playerId, Season: "2017-18" })
+      NBA.stats.playerProfile({ PlayerID: player.playerId })
         .then (result => {
-          console.log(result)
-          let newPlayerSeasonSplits = new PlayerSplits(result)
-          console.log(newPlayerSeasonSplits)
-
-          res.render('show', {newPlayer, newPlayerSplits, newPlayerSeasonSplits})
-        })
+          let newPlayerCareerSplits = new PlayerCareerSplits(result)
+          console.log(newPlayerCareerSplits)
+        res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})
       })
-   })
+    })
+  })
 }
 // Objects  
 function Player (obj) {
@@ -84,7 +81,7 @@ function PlayerSplits (obj) {
  this.mpg = obj.overallPlayerDashboard[0].min;
  this.fgPct = obj.overallPlayerDashboard[0].fgPct;
  this.fg3Pct = obj.overallPlayerDashboard[0].fg3Pct;
- this.ftpct = obj.overallPlayerDashboard[0].ftPct;
+ this.ftPct = obj.overallPlayerDashboard[0].ftPct;
  this.reb = obj.overallPlayerDashboard[0].dreb;
  this.oreb = obj.overallPlayerDashboard[0].oreb;
  this.ast = obj.overallPlayerDashboard[0].ast;
@@ -96,6 +93,20 @@ function PlayerSplits (obj) {
  this.plusMinus = obj.overallPlayerDashboard[0].plusMinus
 }
 
+function PlayerCareerSplits (obj) {
+  this.mpg = obj.careerTotalsRegularSeason[0].min;
+  // this.fgPct
+  // this.fg3Pct
+  // this.ftPct
+  // this.reb
+  // this.oreb
+  // this.ast
+  // this.blk
+  // this.stl
+  // this.to
+  // this.pf
+  // this.ppg
+}
 // Listen
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
