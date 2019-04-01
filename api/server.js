@@ -33,7 +33,6 @@ app.post('/player/search', search)
 // GET functions
 function homeFeed (req, res) {
   res.render('index')
-
 }
 
 // search & POST functions
@@ -53,10 +52,14 @@ function search (req, res) {
       NBA.stats.playerProfile({ PlayerID: player.playerId })
         .then (result => {
           let newPlayerCareerSplits = new PlayerCareerSplits(result)
-          console.log(newPlayerCareerSplits)
+          
+        NBA.stats.shots({ PlayerID: player.playerId  })
+          .then (result => {
+              console.log(result)
 
-        res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})
-      })
+  res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})
+          })
+        })
     })
   })
 }
@@ -122,6 +125,8 @@ app.listen(PORT, () => {
 
 // FEATURES
 * Transaction Feed on Front page
+  1. Create a date object and use it to render most recent transactions?
+    * maybe start with brute force to get first 10
 * Add Comparison Analytics
   * Player Career Stats
     1. Request different season than current
