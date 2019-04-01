@@ -26,13 +26,14 @@ function handleError (res) {
 }
 
 // Routes
-app.get('/', home)
+app.get('/', homeFeed)
 app.post('/player/search', search)
 
 
 // GET functions
-function home (req, res) {
- res.render('index')
+function homeFeed (req, res) {
+  res.render('index')
+
 }
 
 // search & POST functions
@@ -53,11 +54,13 @@ function search (req, res) {
         .then (result => {
           let newPlayerCareerSplits = new PlayerCareerSplits(result)
           console.log(newPlayerCareerSplits)
+
         res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})
       })
     })
   })
 }
+
 // Objects  
 function Player (obj) {
  this.id = obj.commonPlayerInfo[0].personId;
@@ -67,8 +70,6 @@ function Player (obj) {
  this.weight = obj.commonPlayerInfo[0].weight;
  this.jersey = obj.commonPlayerInfo[0].jersey;
  this.team = obj.commonPlayerInfo[0].teamName;
- this.fromYear = obj.commonPlayerInfo[0].fromYear;
- this.toYear = obj.commonPlayerInfo[0].toYear;
  this.draftYear = obj.commonPlayerInfo[0].draftYear;
  this.draftRound = obj.commonPlayerInfo[0].draftRound;
  this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
@@ -108,6 +109,7 @@ function PlayerCareerSplits (obj) {
   this.pf = obj.careerTotalsRegularSeason[0].pf;
   this.ppg = obj.careerTotalsRegularSeason[0].pts
 }
+
 // Listen
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
@@ -116,8 +118,10 @@ app.listen(PORT, () => {
 /* TODO:
 
 // TASKS
+* Refactor search function
 
 // FEATURES
+* Transaction Feed on Front page
 * Add Comparison Analytics
   * Player Career Stats
     1. Request different season than current
