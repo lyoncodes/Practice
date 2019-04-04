@@ -1,4 +1,6 @@
 h1 {
+<<<<<<< HEAD
+=======
  font-family: "Roboto Mono", monospace;
  font-size: 20px;
  text-align: center;
@@ -41,48 +43,99 @@ p .message {
   width: 15px;
  }
  .form input {
+>>>>>>> 8375ff9795b7def3d4c661da195e6e04c0393c7a
   font-family: "Roboto Mono", monospace;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
+  font-size: 20px;
+  text-align: center;
+ }
+ 
+ h2 {
+  font-family: "Roboto Mono", monospace;
   font-size: 14px;
-}
- .form button {
-  font-family: "Roboto Mono", monospace;
-  text-transform: uppercase;
-  outline: 0;
-  background: #4CAF50;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
  }
- .form button:hover,.form button:active,.form button:focus {
-  background: #43a047
+ 
+ .container {
+   width: 360px;
+   padding: 8% 0 0;
+   margin: auto
  }
- .form .message {
-  margin: 5px 0 3px;
-  color: #b3b3b3;
-  font-size: 12px;
-  font-family: "Roboto Mono", monospace;
+ p .message {
+   margin-bottom: 14px;
  }
- #vendor-a {
-   color: #43a050;
+ .form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 15px 45px 25px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
  }
+<<<<<<< HEAD
+ .form .vendor-div {
+   display: none;
+=======
  #guest-a {
   color: #43a050;
 }
  .guest-form .message {
   font-family: "Roboto Mono", monospace;
+>>>>>>> 8375ff9795b7def3d4c661da195e6e04c0393c7a
  }
- .saved-entry {
+ .guest-search {
    display: none;
  }
+ #guest-checkbox {
+  display: inline-block;
+ }
+  #check-box {
+   background: #43a047;
+   width: 15px;
+  }
+  .form input {
+   font-family: "Roboto Mono", monospace;
+   outline: 0;
+   background: #f2f2f2;
+   width: 100%;
+   border: 0;
+   margin: 0 0 15px;
+   padding: 15px;
+   box-sizing: border-box;
+   font-size: 14px;
+ }
+  .form button {
+   font-family: "Roboto Mono", monospace;
+   text-transform: uppercase;
+   outline: 0;
+   background: #4CAF50;
+   width: 100%;
+   border: 0;
+   padding: 15px;
+   color: #FFFFFF;
+   font-size: 14px;
+   -webkit-transition: all 0.3 ease;
+   transition: all 0.3 ease;
+   cursor: pointer;
+  }
+  .form button:hover,.form button:active,.form button:focus {
+   background: #43a047
+  }
+  .form .message {
+   margin: 5px 0 3px;
+   color: #b3b3b3;
+   font-size: 12px;
+   font-family: "Roboto Mono", monospace;
+  }
+  #vendor-a {
+    color: #43a050;
+  }
+  #guest-a {
+   color: #43a050;
+ }
+  .guest-form .message {
+   font-family: "Roboto Mono", monospace;
+  }
+  .saved-entry {
+    display: none;
+  }
