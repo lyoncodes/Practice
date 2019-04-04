@@ -52,23 +52,15 @@ function searchGuest (req, res) {
   let searchPrice = req.body.searchPrice;
   let moveIn = req.body.searchMoveIn;
 
-<<<<<<< HEAD
   let SQL = `SELECT * FROM guests WHERE lastname=$1 OR price=$2 OR movein=$3`
   let values = [searchName, searchPrice, moveIn]
   return client.query(SQL, values)
     .then(data => {
       let guests = data.rows.map(el => new Guest(el))
       console.log(guests)
-=======
-  let SQL = `SELECT * FROM guests WHERE lastname=$1`
-  let values = [searchName]
-  return client.query(SQL, values)
-    .then(data => {
-      let guests = data.rows[0]
->>>>>>> 8375ff9795b7def3d4c661da195e6e04c0393c7a
       res.render('guestView', {
         topicHead: `${appName}`,
-        userValue: guests
+        guests: guests
       })
     })
 }
@@ -77,11 +69,7 @@ function searchGuest (req, res) {
 function addGuest (req, res) {
   let guest = new Guest(req.body)
   let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6);`
-<<<<<<< HEAD
   let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.floorplan, guest.movein, guest.price])
-=======
-  let values = (SQL, [guest.classification, guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
->>>>>>> 8375ff9795b7def3d4c661da195e6e04c0393c7a
   return client.query(SQL, values)
     .then(result => {
       res.render('saved', {
