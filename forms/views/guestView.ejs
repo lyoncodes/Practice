@@ -1,10 +1,15 @@
-<span>
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <%- include('../views/head.ejs'); %>
+</head>
+<body>
  <div class="form">
-  <h1>Added to Day Today</h1>
+  <h1>Search Results</h1>
   <p class="message">
-   <%= userValue.fname %> <%= userValue.lname %><br>
-   <%= userValue.fplan %><br>
-   <%= userValue.moveIn %><br>
+   <%= userValue.firstname %> <%= userValue.lastname %><br>
+   <%= userValue.floorplan %><br>
+   <%= userValue.movein %><br>
    <%= userValue.price %><br>
   </p><br>
   <form name="form2" method="GET" action="/">
@@ -12,3 +17,8 @@
   </form>
  </div>
 </span>
+<%- include('../views/footer.ejs') %>
+<%- include('../views/jquery.ejs') %>
+<span>
+</body>
+</html>
