@@ -31,6 +31,7 @@ app.use(parser.json())
 app.get('/', home)
 app.post('/guest/add', addGuest)
 app.post('/vendor/add', addVendor)
+app.post('/searches', searchGuest)
 app.get('/*', errorFunction)
 
 // GET route READ functions
@@ -38,7 +39,6 @@ function home (req, res) {
   let SQL = 'SELECT * FROM guests'
   return client.query(SQL)
     .then(data => {
-      console.log(data.rows)
       res.render('index', {
         topicHead: `${appName}`,
         guests: data.rows
@@ -46,14 +46,28 @@ function home (req, res) {
   })
 }
 
-// function searchGuests (req, res) {
-//   // let SQL = "SELECT * FROM guests WHERE {req.body."
-// }
+function searchGuest (req, res) {
+
+  let searchName = req.body.searchName;
+  let searchPrice = req.body.searchPrice;
+  let moveIn = req.body.searchMoveIn;
+
+  let SQL = `SELECT * FROM guests WHERE lastname=$1`
+  let values = [searchName]
+  return client.query(SQL, values)
+    .then(data => {
+      let guests = data.rows[0]
+      res.render('guestView', {
+        topicHead: `${appName}`,
+        userValue: guests
+      })
+    })
+}
 
 // POST route UPDATE functions
 function addGuest (req, res) {
   let guest = new Guest(req.body)
-  let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6)`;
+  let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6);`
   let values = (SQL, [guest.classification, guest.fname, guest.lname, guest.fplan, guest.moveIn, guest.price])
   return client.query(SQL, values)
     .then(result => {

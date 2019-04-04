@@ -30,6 +30,9 @@ p .message {
 .form .vendor-div {
   display: none;
 }
+.guest-search {
+  display: none;
+}
 #guest-checkbox {
  display: inline-block;
 }
@@ -74,6 +77,9 @@ p .message {
  #vendor-a {
    color: #43a050;
  }
+ #guest-a {
+  color: #43a050;
+}
  .guest-form .message {
   font-family: "Roboto Mono", monospace;
  }
