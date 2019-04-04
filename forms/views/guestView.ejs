@@ -4,16 +4,22 @@
   <%- include('../views/head.ejs'); %>
 </head>
 <body>
-<<<<<<< HEAD
  <span>
   <div class="form">
    <h1>Search Results</h1>
    <p class="message">
-    <%= userValue.firstname %> <%= userValue.lastname %><br>
-    <%= userValue.floorplan %><br>
-    <%= userValue.movein %><br>
-    <%= userValue.price %><br>
-   </p><br>
+     <% guests.forEach(guest => { %></p>
+    <p class="message">
+     <%= guest.fname %>
+     <%= guest.lname %></p>
+    <p class="message">
+      <%= guest.fplan %></p>
+    <p class="message">
+      <%= guest.moveIn %></p>
+    <p class="message">
+      <%= guest.price %>
+      <% }) %>
+     </p>
    <form name="form2" method="GET" action="/">
     <button type="submit" name="submit">Back to Forms</button>
    </form>
@@ -21,23 +27,5 @@
  </span>
  <%- include('../views/footer.ejs') %>
  <%- include('../views/jquery.ejs') %>
-=======
- <div class="form">
-  <h1>Search Results</h1>
-  <p class="message">
-   <%= userValue.firstname %> <%= userValue.lastname %><br>
-   <%= userValue.floorplan %><br>
-   <%= userValue.movein %><br>
-   <%= userValue.price %><br>
-  </p><br>
-  <form name="form2" method="GET" action="/">
-   <button type="submit" name="submit">Back to Forms</button>
-  </form>
- </div>
-</span>
-<%- include('../views/footer.ejs') %>
-<%- include('../views/jquery.ejs') %>
-<span>
->>>>>>> 8375ff9795b7def3d4c661da195e6e04c0393c7a
 </body>
 </html>
