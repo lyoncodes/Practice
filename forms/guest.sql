@@ -9,6 +9,8 @@ CREATE TABLE guests (
   classification VARCHAR(255),
   firstName VARCHAR(255),
   lastName VARCHAR(255),
+  email VARCHAR(255),
+  telephone VARCHAR(15),
   floorplan VARCHAR(255),
   moveIn VARCHAR(25),
   price NUMERIC(6,2)
