@@ -48,12 +48,12 @@ function home (req, res) {
 
 function searchGuest (req, res) {
 
-  let searchName = req.body.searchName;
-  let searchPrice = req.body.searchPrice;
+  // let searchName = req.body.searchName;
+  // let searchPrice = req.body.searchPrice;
   let moveIn = req.body.searchMoveIn;
 
-  let SQL = `SELECT * FROM guests WHERE lastname=$1 OR price=$2 OR movein=$3`
-  let values = [searchName, searchPrice, moveIn]
+  let SQL = `SELECT * FROM guests WHERE movein=$1`
+  let values = [moveIn]
   return client.query(SQL, values)
     .then(data => {
       let guests = data.rows.map(el => new Guest(el))
@@ -68,11 +68,11 @@ function searchGuest (req, res) {
 // POST route UPDATE functions
 function addGuest (req, res) {
   let guest = new Guest(req.body)
-  let SQL = `INSERT INTO guests(classification, firstName, lastName, floorplan, moveIn, price) VALUES ($1, $2, $3, $4, $5, $6);`
+  let SQL = `INSERT INTO guests(classification, firstname, lastname, floorplan, movein, price) VALUES ($1, $2, $3, $4, $5, $6);`
   let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.floorplan, guest.movein, guest.price])
   return client.query(SQL, values)
     .then(result => {
-      res.render('saved', {
+      res.render('results', {
         topicHead: `${appName}`,
         userValue: guest
       })
@@ -103,10 +103,10 @@ function increment (thing) {
 // Objects
 function Guest (obj) {
   this.classification = "guest"
-  this.fname = obj.firstname,
-  this.lname = obj.lastname,
-  this.fplan = obj.floorplan,
-  this.moveIn = obj.movein,
+  this.firstname = obj.firstname,
+  this.lastname = obj.lastname,
+  this.floorplan = obj.floorplan,
+  this.movein = obj.movein,
   this.price = obj.price
 }
 
