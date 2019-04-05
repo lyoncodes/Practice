@@ -68,8 +68,8 @@ function searchGuest (req, res) {
 // POST route UPDATE functions
 function addGuest (req, res) {
   let guest = new Guest(req.body)
-  let SQL = `INSERT INTO guests(classification, firstname, lastname, floorplan, movein, price) VALUES ($1, $2, $3, $4, $5, $6);`
-  let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.floorplan, guest.movein, guest.price])
+  let SQL = `INSERT INTO guests(classification, firstname, lastname, email, telephone, floorplan, movein, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`
+  let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.email, guest.telephone, guest.floorplan, guest.movein, guest.price])
   return client.query(SQL, values)
     .then(result => {
       res.render('results', {
@@ -105,6 +105,8 @@ function Guest (obj) {
   this.classification = "guest"
   this.firstname = obj.firstname,
   this.lastname = obj.lastname,
+  this.email = obj.email,
+  this.telephone = obj.telephone,
   this.floorplan = obj.floorplan,
   this.movein = obj.movein,
   this.price = obj.price
@@ -139,11 +141,8 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
  * Note Field for Vendors
       * include note field
  * Pop Up for db entries
- * Create <div> class "saved-entry" for holding saved.ejs
- * conditional expression for rendering
-      * .hide(), .show() ejs file for saved guests
-      * 
  * Form Validation
+      * Normalize phone numbers and emails
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
  */
