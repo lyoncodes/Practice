@@ -85,6 +85,9 @@ p .message {
    background: #43a047;
    width: 15px;
   }
+  #mfte {
+    color: #43a047;
+  }
   .form input {
    font-family: "Roboto Mono", monospace;
    outline: 0;

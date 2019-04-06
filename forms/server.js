@@ -48,12 +48,12 @@ function home (req, res) {
 
 function searchGuest (req, res) {
 
-  // let searchName = req.body.searchName;
-  // let searchPrice = req.body.searchPrice;
+  let searchName = req.body.searchName;
+  let searchPrice = req.body.searchPrice;
   let moveIn = req.body.searchMoveIn;
 
-  let SQL = `SELECT * FROM guests WHERE movein=$1`
-  let values = [moveIn]
+  let SQL = `SELECT * FROM guests WHERE lastname=$1 OR price=$2 OR movein=$3`
+  let values = [searchName, searchPrice, moveIn]
   return client.query(SQL, values)
     .then(data => {
       let guests = data.rows.map(el => new Guest(el))
