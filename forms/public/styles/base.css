@@ -106,8 +106,14 @@ p .message {
     height: 150px;
     width: 360px;
     max-width: 360px;
-    padding-top: 1%;
+    padding: 4% 0 4%;
     /* display: none; */
+  }
+  .entry-pop-up img {
+    width: 25%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
   .affix {
     position: fixed;
