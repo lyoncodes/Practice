@@ -49,7 +49,7 @@ function home (req, res) {
 function searchGuest (req, res) {
 
   let searchName = req.body.searchName;
-  let searchPrice = req.body.searchPrice;
+  let searchPrice = req.body.searchPrice ? req.body.searchPrice : null;
   let moveIn = req.body.searchMoveIn;
 
   let SQL = `SELECT * FROM guests WHERE lastname=$1 OR price=$2 OR movein=$3`
@@ -142,7 +142,12 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
       * include note field
  * Pop Up for db entries
  * Form Validation
+      * Figure out the pricing query
       * Normalize phone numbers and emails
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
- */
+ * Search by floorplan
+      * add select with floorplan values
+      * conditional expressions for select values
+ * Search by MFTE
+*/
