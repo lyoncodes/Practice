@@ -1,8 +1,29 @@
 <div class="guest-search">
  <form action="/searches" method="POST"> 
-  <input type="text" name="searchName" placeholder="search guest last name" id="enter"> 
+  <input type="text" name="searchName" placeholder="search guest last name" id="enter">
+  <input type="text" name="searchEmail" placeholder="search guest email" id="enter"> 
   <input type="number" name="searchPrice" placeholder="search guest price range" id="enter">
   <input type="month" name="searchMoveIn" placeholder="search guest move-in" id="enter">
+  <div id="guest-checkbox">
+    <input class="floor" id="check-box" type="checkbox" name="floorplan" value="studio"/>
+    <label for="check-box" class="message">Studio
+  
+    <input class="floor" id="check-box" type="checkbox" name="floorplan" value="open 1-br" />
+    <label for="check-box" class="message">Open 1-BR
+  
+    <input class="floor" id="check-box" type="checkbox" name="floorplan" value="1-bedroom">
+    <label for="check-box" class="message">1-Bedroom
+      
+    <input class="floor" id="check-box" type="checkbox" name="floorplan" value="1-bedroom + den"/>
+    <label for="check-box" class="message">1-Bedroom +
+  
+    <input class="floor" id="check-box" type="checkbox" name="floorplan" value="2-bedroom"/>
+    <label for="check-box" class="message">2-Bedroom
+
+    <input class="floor" id="check-box" type="checkbox" name="floorplan"
+    value="MFTE"/>
+    <label for="check-box" id="mfte" class="message">MFTE
+  </div>
   <button type="submit" name="submit" placeholder="search">Search</button>
  </form> 
 </div>
