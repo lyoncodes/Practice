@@ -142,12 +142,9 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
       * include note field
  * Pop Up for db entries
  * Form Validation
-      * Figure out the pricing query
-      * Normalize phone numbers and emails
+      * add backups for non entries
+      * normalize phone numbers and emails
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
- * Search by floorplan
-      * add select with floorplan values
-      * conditional expressions for select values
  * Search by MFTE
 */

@@ -19,7 +19,7 @@ p .message {
 }
 .form {
  position: relative;
- z-index: 1;
+ z-index: 2;
  background: #ffffff;
  max-width: 360px;
  margin: 0 auto 100px;
@@ -30,46 +30,25 @@ p .message {
 .form .vendor-div {
   display: none;
 }
+.form input {
+ font-family: "Roboto Mono", monospace;
+ font-size: 20px;
+ text-align: center;
+}
 .guest-search {
   display: none;
+}
+#check-box {
+ background: #43a047;
+ width: 15px;
 }
 #guest-checkbox {
  display: inline-block;
 }
- #check-box {
-  background: #43a047;
-  width: 15px;
- }
- .form input {
-  font-family: "Roboto Mono", monospace;
-  font-size: 20px;
-  text-align: center;
- }
- 
- h2 {
-  font-family: "Roboto Mono", monospace;
-  font-size: 14px;
- }
- 
- .container {
-   width: 360px;
-   padding: 8% 0 0;
-   margin: auto
- }
- p .message {
-   margin-bottom: 14px;
- }
- .form {
-  position: relative;
-  z-index: 1;
-  background: #ffffff;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 15px 45px 25px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
- }
- #guest-a {
+#vendor-a {
+  color: #43a050;
+}
+#guest-a {
   color: #43a050;
 }
  .guest-form .message {
@@ -78,13 +57,6 @@ p .message {
  .guest-search {
    display: none;
  }
- #guest-checkbox {
-  display: inline-block;
- }
-  #check-box {
-   background: #43a047;
-   width: 15px;
-  }
   #mfte {
     color: #43a047;
   }
@@ -122,15 +94,23 @@ p .message {
    font-size: 12px;
    font-family: "Roboto Mono", monospace;
   }
-  #vendor-a {
-    color: #43a050;
-  }
-  #guest-a {
-   color: #43a050;
- }
   .guest-form .message {
    font-family: "Roboto Mono", monospace;
   }
   .saved-entry {
     display: none;
   }
+  .entry-pop-up {
+    background: #5fce65;
+    opacity: 0.7;
+    height: 150px;
+    width: 360px;
+    max-width: 360px;
+    padding-top: 1%;
+    /* display: none; */
+  }
+  .affix {
+    position: fixed;
+    z-index: 9999;
+    display: none;
+}
