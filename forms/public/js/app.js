@@ -21,7 +21,7 @@ if (element !== null) {
     var height = $(window).scrollTop()
     if (height > position.top) {
       target.css('visibility', 'hidden')
-      affix.css('display', 'inline-block')
+      affix.css('display', 'block')
     } else {
       affix.css('display', 'none')
       target.css('visibility', 'visible')

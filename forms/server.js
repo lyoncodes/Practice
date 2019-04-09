@@ -72,9 +72,8 @@ function addGuest (req, res) {
   let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.email, guest.telephone, guest.floorplan, guest.movein, guest.price])
   return client.query(SQL, values)
     .then(result => {
-      res.render('results', {
-        topicHead: `${appName}`,
-        userValue: guest
+      res.render('index', {
+        topicHead: `${appName}`
       })
     })
   .catch(err => handleError(err, res))

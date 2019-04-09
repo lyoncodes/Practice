@@ -107,7 +107,7 @@ p .message {
     width: 360px;
     max-width: 360px;
     padding: 4% 0 4%;
-    /* display: none; */
+    display: none;
   }
   .entry-pop-up img {
     width: 25%;
