@@ -45,7 +45,6 @@ function home (req, res) {
       guestArr.push(result[i])
     }
     let guests = guestArr.map(el => new Guest(el))
-    console.log(guests)
       res.render('index', {
         topicHead: `${appName}`,
         guests: guests
@@ -74,6 +73,7 @@ function searchGuest (req, res) {
 
 // POST route UPDATE functions
 function addGuest (req, res) {
+  console.log(req.body)
   let guest = new Guest(req.body)
   console.log(guest)
   let SQL = `INSERT INTO guests(classification, firstname, lastname, email, telephone, floorplan, movein, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`
@@ -92,7 +92,6 @@ function addVendor (req, res) {
   let vendor = new Vendor(req.body)
   let SQL = `INSERT INTO vendors(classification, company, firstName, lastName, job, serviceDate, notes) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
   let values = (SQL, [vendor.classification, vendor.company, vendor.firstName, vendor.lastName, vendor.job, vendor.serviceDate, vendor.notes])
-  console.log(values)
   return client.query(SQL, values)
     .then(result => {
       res.render('saved', {
@@ -111,13 +110,13 @@ function increment (thing) {
 // Objects
 function Guest (obj) {
   this.classification = "guest"
-  this.firstname = obj.firstname,
-  this.lastname = obj.lastname,
-  this.email = obj.email,
-  this.telephone = obj.telephone,
-  this.floorplan = obj.floorplan,
-  this.movein = obj.movein,
-  this.price = obj.price
+  this.firstname = obj.firstname ? obj.firstname : 'n/a',
+  this.lastname = obj.lastname ? obj.lastname : 'n/a',
+  this.email = obj.email ? obj.email : 'n/a',
+  this.telephone = obj.telephone ? obj.telephone : 'n/a',
+  this.floorplan = obj.floorplan ? obj.floorplan : 'n/a',
+  this.movein = obj.movein ? obj.movein : 'n/a',
+  this.price = obj.price ? obj.price : 'n/a'
 }
 
 function Vendor (obj) {
@@ -148,9 +147,7 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 /**TODO
  * Note Field for Vendors
       * include note field
- * Pop Up for db entries
  * Form Validation
-      * add backups for non entries
       * normalize phone numbers and emails
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
