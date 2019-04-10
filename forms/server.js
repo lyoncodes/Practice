@@ -38,11 +38,18 @@ app.get('/*', errorFunction)
 function home (req, res) {
   let SQL = 'SELECT * FROM guests'
   return client.query(SQL)
-    .then(data => {
+  .then(data => {
+    let result = data.rows;
+    let guestArr = []
+    for (let i = result.length-6; i < result.length; i ++) {
+      guestArr.push(result[i])
+    }
+    let guests = guestArr.map(el => new Guest(el))
+    console.log(guests)
       res.render('index', {
         topicHead: `${appName}`,
-        guests: data.rows
-    })
+        guests: guests
+      })
   })
 }
 
@@ -68,12 +75,14 @@ function searchGuest (req, res) {
 // POST route UPDATE functions
 function addGuest (req, res) {
   let guest = new Guest(req.body)
+  console.log(guest)
   let SQL = `INSERT INTO guests(classification, firstname, lastname, email, telephone, floorplan, movein, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`
   let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.email, guest.telephone, guest.floorplan, guest.movein, guest.price])
   return client.query(SQL, values)
     .then(result => {
-      res.render('index', {
-        topicHead: `${appName}`
+      res.render('results', {
+        topicHead: `${appName}`,
+        userValue: guest
       })
     })
   .catch(err => handleError(err, res))

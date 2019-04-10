@@ -5,20 +5,29 @@
 </head>
 <body>
   <div class="container">
+
     <div class="entry-pop-up">
       <h1>Guest added to database</h1>
       <img src="../styles/img/checked.png">
     </div>
+
    <div class="form">
       <h1><%= topicHead %></h1>
-    <h2>Walk-In Guest / <a href="#" id="vendor-a">Vendor Form</a> / <a href="#" id="guest-a">Search Guest</a></h2>
+      <h2>Walk-In Guest / <a href="#" id="vendor-a">Vendor Form</a> / <a href="#" id="guest-a">Search Guest</a></h2>
     <%- include('../views/search.ejs') %>
-    <br>
+      <br>
      <%- include('../views/form.ejs') %>
      <br>
-     <%- include('../views/form2.ejs') %>
+       <%- include('../views/form2.ejs') %>
+       <h1>Recently Visited</h1>
+       <%  guests.forEach(guest => { %>
+        <p class="message"><%= guest.firstname %> <%= guest.lastname %></p>
+        <p class="message"><%= guest.floorplan %> <%= guest.movein %></p>
+        <p class="message"><%= guest.email %>, <%= guest.telephone %></p>
+        <% }) %>
+   </div>
   </div>
- </div>
+
  <%- include('../views/footer.ejs') %>
  <%- include('../views/jquery.ejs') %>
 </body>
