@@ -3,7 +3,8 @@
     <input type="text" name="firstname" placeholder="First Name"/>
     <input type="text" name="lastname" placeholder="Last Name"/>
     <input type="email" name="email" placeholder="Email" />
-    <input type="tel" name="telephone" placeholder="Telephone" />
+    <input type="tel" id="phone" name="telephone" placeholder="(206)-xxx-xxxx" 
+    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
     <div id="guest-checkbox">
       <input class="floor" id="check-box" type="checkbox" name="floorplan" value="studio"/>
       <label for="check-box" class="message">Studio
