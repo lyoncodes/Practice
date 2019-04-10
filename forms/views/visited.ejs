@@ -1,0 +1,6 @@
+<h1>Recently Visited</h1>
+<%  guests.forEach(guest => { %>
+ <p class="message" id="vendor-a"><%= guest.firstname %> <%= guest.lastname %></p>
+ <p class="message"><%= guest.floorplan %> <%= guest.movein %></p>
+ <p class="message"><%= guest.email %>, <%= guest.telephone %></p>
+ <% }) %>
