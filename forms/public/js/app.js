@@ -6,7 +6,9 @@ $('#vendor-a').click(function() {
 $('#guest-a').click(function() {
  $('.guest-search').toggle('display')
 })
-
+$('.guest-form').on(function(submit) {
+ $('.entry-pop-up').toggle('display')
+})
 var target = $('.entry-pop-up')
 target.after('<div class="affix" id="affix"></div>')
 
