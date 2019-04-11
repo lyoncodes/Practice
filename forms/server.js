@@ -73,9 +73,8 @@ function searchGuest (req, res) {
 
 // POST route UPDATE functions
 function addGuest (req, res) {
-  console.log(req.body)
   let guest = new Guest(req.body)
-  console.log(guest)
+  // let regPhone = normalizePhone(guest.telephone);
   let SQL = `INSERT INTO guests(classification, firstname, lastname, email, telephone, floorplan, movein, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`
   let values = (SQL, [guest.classification, guest.firstname, guest.lastname, guest.email, guest.telephone, guest.floorplan, guest.movein, guest.price])
   return client.query(SQL, values)
@@ -102,7 +101,11 @@ function addVendor (req, res) {
   .catch(err => handleError(err, res))
 }
 
-// Operators
+// Operators & Normalizers
+// function normalizePhone(number) {
+
+// }
+
 function increment (thing) {
   return thing++;
 }
@@ -128,7 +131,8 @@ function Vendor (obj) {
   this.date = obj.serviceDate,
   this.note = obj.note
 }
-
+var guestImport = require('./public/js/objects')
+console.log(guestImport.Gu)
 // Error Handling Functions
 function errorFunction (req, res) {
   res.status(404).send('404 error')
@@ -148,7 +152,7 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
  * Note Field for Vendors
       * include note field
  * Form Validation
-      * normalize phone numbers and emails
+      * normalize phone numbers and emails in javascript
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
  * Search by MFTE
