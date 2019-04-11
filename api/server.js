@@ -27,18 +27,29 @@ function handleError (res) {
  res.status(400).send('400 error')
 }
 
+// Operators & Dates
+let today = new Date().toDateString();
+
 // Routes
 app.get('/', homeFeed)
-app.post('/player/search', search)
+app.post('/player/search', searchPlayer)
 
 
 // GET functions
 function homeFeed (req, res) {
+  NBA.stats.scoreboard({
+    GameID: "00",
+    DayOffset: "0",
+    gameDate: `${today}`
+  })
+  .then (result => {
+    console.log(result)
+  })
   res.render('index')
 }
 
-// search & POST functions
-function search (req, res) {
+// searchPlayer & POST functions
+function searchPlayer (req, res) {
   let query = `${req.body.firstname} ${req.body.lastname}`
   query = query.toLowerCase();
   const player = NBA.findPlayer(query)
@@ -62,37 +73,7 @@ function search (req, res) {
    })
 }
 
-function advancedStats () {
-  const player = NBAclient.getPlayerID("Damian Lillard")
-  console.log(player)
-  const stats = NBAclient.playerTrackingShooting
-  ({
-    DateFrom: "",
-    DateTo: "",
-    GameSegment: "",
-    LastNGames: 0,
-    LeagueID: '00',
-    Location: '',
-    Month: 0,
-    OpponentTeamID: 0,
-    Outcome: '',
-    PaceAdjust: 'N',
-    Period: 0,
-    PerMode: 'PerGame',
-    PlayerID: '',
-    PORound: 0,
-    Season: 2018-19,
-    SeasonSegment: '',
-    SeasonType: 'Regular+Season',
-    TeamID: 0,
-    VsConference: '',
-    VsDivision: ''
-})
-    .then (result => {
-      console.log(result)
-    })
-}
-advancedStats();
+
 
 // Objects  
 function Player (obj) {
@@ -143,9 +124,9 @@ function PlayerCareerSplits (obj) {
   this.ppg = obj.careerTotalsRegularSeason[0].pts
 }
 
-function PlayerAdvancedStats (obj) {
-
+function Feed (obj) {
 }
+
 // Listen
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
