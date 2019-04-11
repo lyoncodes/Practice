@@ -27,25 +27,21 @@ function handleError (res) {
  res.status(400).send('400 error')
 }
 
-// Operators & Dates
-let today = new Date().toDateString();
-
 // Routes
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer)
 
-
+// `${today.month} - ${today.day} - ${today.year}`
 // GET functions
 function homeFeed (req, res) {
-  NBA.stats.scoreboard({
-    GameID: "00",
-    DayOffset: "0",
-    gameDate: `${today}`
-  })
+  let newDay = new Date();
+  let today = new Day(newDay);
+  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: "04-10-2019"})
   .then (result => {
-    console.log(result)
+    let games = result.lineScore.map(games => new Feed(games))
+    console.log(games)
+    res.render('index')
   })
-  res.render('index')
 }
 
 // searchPlayer & POST functions
@@ -75,7 +71,13 @@ function searchPlayer (req, res) {
 
 
 
-// Objects  
+// Objects 
+function Day (date) {
+  this.year = date.getFullYear();
+  this.month = (date.getMonth() + 1);
+  this.day = date.getDate();
+} 
+
 function Player (obj) {
  this.id = obj.commonPlayerInfo[0].personId;
  this.name = obj.commonPlayerInfo[0].displayFirstLast;
@@ -125,6 +127,14 @@ function PlayerCareerSplits (obj) {
 }
 
 function Feed (obj) {
+  this.id = obj.gameId;
+  this.team = obj.teamAbbreviation;
+  this.record = obj.teamWinsLosses;
+  this.q1 = obj.ptsQtr1;
+  this.q2 = obj.ptsQtr2;
+  this.q3 = obj.ptsQtr3;
+  this.q4 = obj.ptsQtr4;
+  this.final = obj.pts;
 }
 
 // Listen
@@ -140,7 +150,8 @@ app.listen(PORT, () => {
 // FEATURES
 * Transaction Feed on Front page
   1. Create a date object and use it to render most recent transactions?
-    * maybe start with brute force to get first 10
+    * maybe start with brute force to get first 10 
+    2. Instantiate new object for front end by mapping obj.lineScore
 * Add Comparison Analytics
   * Player Career Stats
     1. Request different season than current
