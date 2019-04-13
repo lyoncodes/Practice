@@ -61,7 +61,14 @@ class Game {
    y: this.snake[0].y + DIRECTIONS[this.currentDirection].y,
   }
   this.snake.unshift(head)
-  
+  // Capture Dot Event -- Player Scores!
+  if (this.snake[0].x === this.dot.x && this.snake[0].y === this.dot.y) {
+   this.score ++
+   this.ui.updateScore(this.score)
+   this.generateDot()
+  } else {
+   this.snake.pop()
+  }
  }
  start() {
   if (!this.timer) {
