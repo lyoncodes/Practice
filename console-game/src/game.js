@@ -37,6 +37,23 @@ class Game {
   this.ui.resetScore()
   this.ui.render()
  }
- 
+
+ // changeDirection function
+ changeDirection(_, key) {
+  if ((key.name === 'up' || key.name === 'w') && this.currentDirection !== 'down') {
+   this.currentDirection = 'up'
+  }
+ }
+ start() {
+  if (!this.timer) {
+   this.reset()
+
+   this.timer = setInterval(this.tick.bind(this), GAME_SPEED)
+  }
+ }
+ quit() {
+  process.exit(0)
+ }
+
 }
 module.exports = { Game };
