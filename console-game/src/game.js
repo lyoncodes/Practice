@@ -41,6 +41,7 @@ class Game {
   this.generateDot()
   this.ui.resetScore()
   this.ui.render()
+
  }
 
  // changeDirection function w/ conditionals for double input
@@ -91,7 +92,11 @@ class Game {
     this.dot.y = this.generateRandomPixelCoord(1, this.ui.gameContainer.height-1)
 
     // What if the pixel ends up on the tail of the snake? We'll need to regenerate the dot in that event
-    
+    this.snake.forEach(segment => {
+     if (segment.x === this.dot.x && segment.y === this.dot.y) {
+      this.generateDot()
+     }
+    })
  }
  
  start() {
