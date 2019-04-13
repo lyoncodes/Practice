@@ -15,4 +15,24 @@ class UserInterface {
   this.gameContainer = this.blessed.box(this.gameBox)
   this.scoreContainer = this.blessed.box(this.scoreBox)
  }
+ //functions
+ createGameBox() {
+  return {
+   parent: this.screen,
+   top: 1,
+   left: 0,
+   width: '100%',
+   height: '100%-1',
+   style: {
+    fg: 'black',
+    bg: 'black',
+   },
+  }
+ }
+
+ createScoreBox() {
+  return {
+   
+  }
+ }
 }
