@@ -6,3 +6,4 @@ const {
  SNAKE_COLOR,
  DOT_COLOR,
 } = require('./constants')
+
