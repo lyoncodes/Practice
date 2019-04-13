@@ -1,7 +1,8 @@
-const blessed = require('blessed')
+'use strict'
 // Terminal API library that provides screen and elements
+const blessed = require('blessed')
 
-class UserInterface {
+class userInterface {
  constructor() {
   this.blessed = blessed
   this.screen = blessed.screen()
@@ -32,7 +33,44 @@ class UserInterface {
 
  createScoreBox() {
   return {
-   
+   parent: this.screen,
+   top: 0,
+   left: 'left',
+   width: '100%',
+   height: 1,
+   tags: true,
+   style: {
+    fg: 'black',
+    bg: 'white',
+   },
   }
  }
+
+ createGameOverBox() {
+  return {
+   parent: this.screen,
+   top: 'center',
+   left: 'center',
+   width: 20,
+   height: 6,
+   tags: true,
+   valign: 'middle',
+   content: `{center}YOU DIED\n\nPRESS ENTER{/center}`,
+   border: {
+    type: 'line',
+   },
+   style: {
+    fg: 'black',
+    bg: 'magenta',
+    border: {
+     fg: '#ffffff',
+    },
+   },
+  }
+ }
+
+ render() {
+  this.screen.render()
+ }
 }
+module.exports = { userInterface }
