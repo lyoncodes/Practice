@@ -98,7 +98,20 @@ class Game {
      }
     })
  }
+
+ drawSnake() {
+  this.snake.forEach(segment => {
+   this.ui.draw(segment, SNAKE_COLOR)
+  })
+ }
  
+ drawDot() {
+  this.ui.draw(this.dot, DOT_COLOR)
+ }
+
+ isGameOver() {
+ 
+ }
  start() {
   if (!this.timer) {
    this.reset()
