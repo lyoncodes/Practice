@@ -43,6 +43,25 @@ class Game {
   if ((key.name === 'up' || key.name === 'w') && this.currentDirection !== 'down') {
    this.currentDirection = 'up'
   }
+  if ((key.name === 'down' || key.name === 's') && this.currentDirection !== 'up') {
+   this.currentDirection = 'down'
+  }
+  if ((key.name === 'left' || key.name === 'a') && this.currentDirection !== 'right') {
+   this.currentDirection = 'left'
+  }
+  if ((key.name === 'right' || key.name === 'd') && this.currentDirection !== 'left') {
+   this.currentDirection = 'right'
+  }
+ }
+
+ moveSnake() {
+  // move the head forward one pixel based on velocity
+  const head = {
+   x: this.snake[0].x + DIRECTIONS[this.currentDirection].x,
+   y: this.snake[0].y + DIRECTIONS[this.currentDirection].y,
+  }
+  this.snake.unshift(head)
+  
  }
  start() {
   if (!this.timer) {
