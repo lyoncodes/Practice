@@ -6,33 +6,86 @@ const screen = blessed.screen({
  smartCSR: true
 });
 
-screen.title = 'DARK SOULS III'
+screen.title = 'FORM'
 
-// Layout
+const form = blessed.form({
+  parent: screen,
+  keys: true,
+  left: 0,
+  top: 0,
+  width: 30,
+  height: 4,
+  bg: 'green',
+  content: 'Submit or cancel?'
+});
 
-const box = blessed.box({
-  top: 'center',
-  left: 'center',
-  width: '50%',
-  height: '50%',
-  content: '{bold}DARK SOULS III{bold}',
-  tags: true,
-  border: {
-    type: 'line'
+const submit = blessed.button({
+  parent: form,
+  mouse: true,
+  keys: true,
+  shrink: true,
+  padding: {
+    left: 1,
+    right: 1
   },
+  left: 10,
+  top: 2,
+  shrink: true,
+  name: 'submit',
+  content: 'submit',
   style: {
-    fg: 'white',
-    bg: 'red',
-    border: {
-     fg: '#f0f0f0'
+    bg: 'blue',
+    focus: {
+      bg: 'red'
     },
     hover: {
-     bg: 'white'
+      bg: 'red'
     }
   }
 });
 
-// Append box to screen
-screen.append(box);
+var cancel = blessed.button ({
+  parent: form,
+  mouse: true,
+  keys: true,
+  shrink: true,
+  padding: {
+    left: 1,
+    right: 1
+  },
+  left: 20,
+  top: 2,
+  shrink: true,
+  name: 'cancel',
+  content: 'cancel',
+  style: {
+    bg: 'blue',
+    focus: {
+      bg: 'red'
+    },
+    hover: {
+      bg: 'red'
+    }
+  }
+});
+
+submit.on('press', () => {
+  form.submit();
+});
+
+cancel.on('press', () => {
+  form.setContent('Submitted');
+  screen.render();
+});
+
+form.on('submit', data => {
+  form.setContent('submitted');
+  screen.render();
+})
+// Exit Function
+
+screen.key('q', () => {
+  process.exit(0);
+});
 
 screen.render();
