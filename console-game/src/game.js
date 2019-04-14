@@ -125,7 +125,12 @@ class Game {
     this.snake[0].y <= -1
    )
  }
- 
+
+ showGameOverScreen() {
+  this.ui.gameOverScreen()
+  this.ui.render()
+ }
+
  tick() {
   if (this.isGameOver()) {
    this.showGameOverScreen()
@@ -134,7 +139,12 @@ class Game {
 
    return
   }
-
+// calls
+  this.ui.clearScreen()
+  this.drawDot()
+  this.moveSnake()
+  this.drawSnake()
+  this.ui.render()
  }
  start() {
   if (!this.timer) {
