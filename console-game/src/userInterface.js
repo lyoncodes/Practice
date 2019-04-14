@@ -92,7 +92,22 @@ class userInterface {
   // Score keeping
   updateScore(score) {
    // blessed element setLine()
-    this.scoreContainer.setLine(0, `${bold}Score:{/bold} ${score}`)
+    this.scoreContainer.setLine(0, `{bold}Score:{/bold} ${score}`)
+  }
+  gameOverScreen() {
+   this.gameContainer = this.blessed.box(this.gameOverBox)
+  }
+
+  clearScreen() {
+   this.gameContainer.detach()
+   this.gameContainer = this.blessed.box(this.gameBox)
+  }
+
+  // Reset Score
+  resetScore() {
+   this.scoreContainer.detach()
+   this.scoreContainer = this.blessed.box(this.scoreBox)
+   this.updateScore(0)
   }
 
  render() {
