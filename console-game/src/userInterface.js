@@ -80,8 +80,8 @@ class userInterface {
      parent: this.gameContainer,
      top: coord.y,
      left: coord.x,
-     width: 1,
-     height: 1,
+     width: 2,
+     height: 2,
      style: {
        fg: color,
        bg: color,

@@ -1,5 +1,5 @@
 'use strict'
-const GAME_SPEED = 25
+const GAME_SPEED = 50
 const DIRECTIONS = {
  up: { x: 0, y: -1 },
  down: { x: 0, y: -1 },
