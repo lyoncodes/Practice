@@ -110,7 +110,31 @@ class Game {
  }
 
  isGameOver() {
+  // filter the head unit, as it's the collider. If the head collides, then collision. some() array method to check if any part of segment is meeting snake.x, snake.y
+   const collide = this.snake.filter((_, i) => i > 0).some(segment => segment.x === this.snake[0].x && segment.y === this.snake[0].y)
+
+   return (
+    collide ||
+    // Right Wall
+    this.snake[0].x >= this.ui.gameContainer.width-1 ||
+    // Left Wall
+    this.snake[0].x <= -1 ||
+    // Top Wall
+    this.snake[0].y >= this.ui.gameContainer.height-1 ||
+    // Bottom wall
+    this.snake[0].y <= -1
+   )
+ }
  
+ tick() {
+  if (this.isGameOver()) {
+   this.showGameOverScreen()
+   clearInterval(this.timer)
+   this.timer = null
+
+   return
+  }
+
  }
  start() {
   if (!this.timer) {
