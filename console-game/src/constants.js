@@ -6,7 +6,7 @@ const DIRECTIONS = {
  right: { x: 1, y: 0 },
  left: { x: -1, y: 0 },
 }
-const INITIAL_SNAKE_SIZE = 4
+const INITIAL_SNAKE_SIZE = 2
 const SNAKE_COLOR = 'white'
 const DOT_COLOR = 'green'
 
