@@ -88,8 +88,8 @@ class Game {
  }
 
  generateDot() {
-    this.dot.x = this.generateRandomPixelCoord(0, this.ui.gameContainer.width-1)
-    this.dot.y = this.generateRandomPixelCoord(1, this.ui.gameContainer.height-1)
+    this.dot.x = this.generateRandomPixelCoord(0, this.ui.gameContainer.width-2)
+    this.dot.y = this.generateRandomPixelCoord(1, this.ui.gameContainer.height-2)
 
     // What if the pixel ends up on the tail of the snake? We'll need to regenerate the dot in that event
     this.snake.forEach(segment => {
