@@ -82,6 +82,11 @@ form.on('submit', data => {
   form.setContent('submitted');
   screen.render();
 })
+
+form.on('reset', data => {
+  form.setContent('canceled');
+  screen.render();
+})
 // Exit Function
 
 screen.key('q', () => {
