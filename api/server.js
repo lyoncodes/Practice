@@ -33,6 +33,9 @@ app.post('/player/search', searchPlayer)
 
 // `${today.month} - ${today.day} - ${today.year}`
 // GET functions
+/*
+gameDate accepts MM-DD-YYYY. The value 4-10 is a placeholder to get example data. Based on the response body, we need to render games IF they match the values stored in the array at the end of the response 
+*/
 function homeFeed (req, res) {
   let newDay = new Date();
   let today = new Day(newDay);
@@ -159,3 +162,4 @@ app.listen(PORT, () => {
     * Render All Seasons to Table
   * Advaned Analytics -- SynergyTeamsPlayTypeStats
 */
+// I'm in napa!
