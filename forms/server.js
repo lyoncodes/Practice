@@ -32,6 +32,7 @@ app.get('/', home)
 app.post('/guest/add', addGuest)
 app.post('/vendor/add', addVendor)
 app.post('/searches', searchGuest)
+app.post('/searchByPrice', searchByPrice)
 app.get('/*', errorFunction)
 
 // GET route READ functions
@@ -54,21 +55,34 @@ function home (req, res) {
 
 function searchGuest (req, res) {
   let searchName = req.body.searchName;
-  let searchPrice = req.body.searchPrice ? req.body.searchPrice : null;
+  
   let searchEmail = req.body.searchEmail;
   let moveIn = req.body.searchMoveIn;
   let searchFloor = req.body.floorplan;
   let SQL = `SELECT * FROM guests WHERE lastname=$1 OR price=$2 OR email=$3 OR movein=$4 OR floorplan=$5`
   let values = [searchName, searchPrice, searchEmail, moveIn, searchFloor]
   return client.query(SQL, values)
-    .then(data => {
-      let guests = data.rows.map(el => new Guest(el))
-      console.log(guests)
-      res.render('guestView', {
-        topicHead: `${appName}`,
-        guests: guests
-      })
+  .then(data => {
+    let guests = data.rows.map(el => new Guest(el))
+    console.log(guests)
+    res.render('guestView', {
+      topicHead: `${appName}`,
+      guests: guests
     })
+  })
+}
+
+function searchByPrice (req, res) {
+  // return all results where col price is $500 greater than and $500 less than searchPrice
+  let searchPrice = req.body.searchPrice
+  let MAX = searchPrice + 500;
+  let MIN = searchPrice - 500;
+  let SQL = `SELECT * FROM guests WHERE price BETWEEN $1 AND $2`
+  let values = [MIN, MAX];
+  return client.query(SQL, values)
+  .then (data => {
+    console.log(data)
+  })
 }
 
 // POST route UPDATE functions
@@ -132,7 +146,7 @@ function Vendor (obj) {
   this.note = obj.note
 }
 var guestImport = require('./public/js/objects')
-console.log(guestImport.Gu)
+console.log(guestImport.Guest)
 // Error Handling Functions
 function errorFunction (req, res) {
   res.status(404).send('404 error')
@@ -156,4 +170,6 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
  * Search by MFTE
+ * Search by Price
+ * Fuzzy search by name
 */
