@@ -59,8 +59,8 @@ function searchGuest (req, res) {
   let searchEmail = req.body.searchEmail;
   let moveIn = req.body.searchMoveIn;
   let searchFloor = req.body.floorplan;
-  let SQL = `SELECT * FROM guests WHERE lastname=$1 OR price=$2 OR email=$3 OR movein=$4 OR floorplan=$5`
-  let values = [searchName, searchPrice, searchEmail, moveIn, searchFloor]
+  let SQL = `SELECT * FROM guests WHERE lastname=$1 OR email=$2 OR movein=$3 OR floorplan=$4`
+  let values = [searchName, searchEmail, moveIn, searchFloor]
   return client.query(SQL, values)
   .then(data => {
     let guests = data.rows.map(el => new Guest(el))
@@ -81,7 +81,12 @@ function searchByPrice (req, res) {
   let values = [MIN, MAX];
   return client.query(SQL, values)
   .then (data => {
-    console.log(data)
+    let guests = data.rows.map(el => new Guest(el))
+    console.log(guests)
+    res.render('guestView', {
+      topicHead: `${appName}`,
+      guests: guests
+    })
   })
 }
 
