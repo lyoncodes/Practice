@@ -3,8 +3,6 @@
 // Node Dependency
 const express = require('express')
 const pg = require('pg')
-const superagent = require('superagent')
-const methodOverride = require('method-override')
 const parser = require('body-parser')
 
 require('dotenv').config()
@@ -28,12 +26,16 @@ app.use(express.static('./public'))
 app.use(parser.json())
 
 // Routes
-app.get('/', home)
-app.post('/guest/add', addGuest)
-app.post('/vendor/add', addVendor)
-app.post('/searches', searchGuest)
-app.post('/searchByPrice', searchByPrice)
-app.get('/*', errorFunction)
+
+function engage () {
+  app.get('/', home)
+  app.post('/guest/add', addGuest)
+  app.post('/vendor/add', addVendor)
+  app.post('/searches', searchGuest)
+  app.post('/searchByPrice', searchByPrice)
+  app.get('/*', errorFunction)
+}
+engage();
 
 // GET route READ functions
 function home (req, res) {
@@ -50,9 +52,8 @@ function home (req, res) {
         topicHead: `${appName}`,
         guests: guests
       })
-  })
+  })  
 }
-
 function searchGuest (req, res) {
   let searchName = req.body.searchName;
   
@@ -168,6 +169,7 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 
 
 /**TODO
+ * Organize routers for each route and seperate using modules
  * Note Field for Vendors
       * include note field
  * Form Validation
@@ -175,6 +177,6 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
  * Search by MFTE
- * Search by Price
+
  * Fuzzy search by name
 */
