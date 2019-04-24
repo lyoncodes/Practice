@@ -1,28 +1,23 @@
 'use strict'
-console.log(module.filename);
-console.log(module.id);
-console.log(module.exports);
 
 // Node Dependency
-let dependencies = require('./dependency');
-let postgres = require('./postgres');
+const express = require('express')
+const pg = require('pg')
+const parser = require('body-parser')
 
-const express = dependencies.express;
-const pg = dependencies.pg;
-const parser = dependencies.parser;
-const dotenv = dependencies.dotenv;
+require('dotenv').config()
 
 // Build HTTP Server
-const app = dependencies.server;
+const app = express();
 const appName = "Day Today"
 
 //PORT
 const PORT = process.env.PORT || 3000;
 
 // Database Setup
-const client = postgres.client;
-const connect = postgres.connect;
-const error = postgres.error;
+const client = new pg.Client(process.env.DATABASE_URL)
+client.connect()
+client.on('error', err => console.log(err))
 
 // Set the view engine
 app.set('view engine', 'ejs')
@@ -59,6 +54,7 @@ function home (req, res) {
       })
   })  
 }
+
 function searchGuest (req, res) {
   let searchName = req.body.searchName;
   
@@ -127,13 +123,6 @@ function addVendor (req, res) {
 }
 
 // Operators & Normalizers
-// function normalizePhone(number) {
-
-// }
-
-function increment (thing) {
-  return thing++;
-}
 
 // Objects
 function Guest (obj) {
@@ -157,6 +146,7 @@ function Vendor (obj) {
   this.note = obj.note
 }
 
+
 // Error Handling Functions
 function errorFunction (req, res) {
   res.status(404).send('404 error')
@@ -167,14 +157,14 @@ function handleError(err, res) {
   if (res) res.status(500).render('error')
 }
 
-module.exports = app;
-
+// App Listener
 app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 )
 
 
 
-/**TODO
+/* TODO
+
  * Organize routers for each route and seperate using modules
  * Note Field for Vendors
       * include note field
@@ -183,6 +173,6 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
  * Search by MFTE
-
  * Fuzzy search by name
+
 */
