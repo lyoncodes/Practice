@@ -6,6 +6,7 @@ console.log(module.exports);
 // Node Dependency
 let dependencies = require('./dependency');
 let postgres = require('./postgres');
+let view = require('./viewengine');
 
 const express = dependencies.express;
 const pg = dependencies.pg;
@@ -25,6 +26,9 @@ const connect = postgres.connect;
 const error = postgres.error;
 
 // Set the view engine
+const viewEngine = module.exports.set;
+
+
 app.set('view engine', 'ejs')
 app.use(parser.urlencoded({ extended: false }))
 app.use(express.static('./public'))
