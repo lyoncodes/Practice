@@ -1,12 +1,9 @@
 'use strict'
-console.log(module.filename);
-console.log(module.id);
-console.log(module.exports);
-
 // Node Dependency
 let dependencies = require('./dependency');
 let postgres = require('./postgres');
 let view = require('./viewengine');
+let guests = require('./guest')
 
 const express = dependencies.express;
 const pg = dependencies.pg;
@@ -26,16 +23,12 @@ const connect = postgres.connect;
 const error = postgres.error;
 
 // Set the view engine
-const viewEngine = module.exports.set;
-
-
 app.set('view engine', 'ejs')
 app.use(parser.urlencoded({ extended: false }))
 app.use(express.static('./public'))
 app.use(parser.json())
 
 // Routes
-
 function engage () {
   app.get('/', home)
   app.post('/guest/add', addGuest)
@@ -53,7 +46,7 @@ function home (req, res) {
   .then(data => {
     let result = data.rows;
     let guestArr = []
-    for (let i = result.length-6; i < result.length; i ++) {
+    for (let i = result.length-5; i < result.length; i ++) {
       guestArr.push(result[i])
     }
     let guests = guestArr.map(el => new Guest(el))
@@ -140,16 +133,18 @@ function increment (thing) {
 }
 
 // Objects
-function Guest (obj) {
-  this.classification = "guest"
-  this.firstname = obj.firstname ? obj.firstname : 'n/a',
-  this.lastname = obj.lastname ? obj.lastname : 'n/a',
-  this.email = obj.email ? obj.email : 'n/a',
-  this.telephone = obj.telephone ? obj.telephone : 'n/a',
-  this.floorplan = obj.floorplan ? obj.floorplan : 'n/a',
-  this.movein = obj.movein ? obj.movein : 'n/a',
-  this.price = obj.price ? obj.price : 'n/a'
-}
+let Guest = guests.Guest;
+
+// function Guest (obj) {
+//   this.classification = "guest"
+//   this.firstname = obj.firstname ? obj.firstname : 'n/a',
+//   this.lastname = obj.lastname ? obj.lastname : 'n/a',
+//   this.email = obj.email ? obj.email : 'n/a',
+//   this.telephone = obj.telephone ? obj.telephone : 'n/a',
+//   this.floorplan = obj.floorplan ? obj.floorplan : 'n/a',
+//   this.movein = obj.movein ? obj.movein : 'n/a',
+//   this.price = obj.price ? obj.price : 'n/a'
+// }
 
 function Vendor (obj) {
   this.classification = "vendor"
@@ -170,8 +165,6 @@ function handleError(err, res) {
   console.log(err)
   if (res) res.status(500).render('error')
 }
-
-module.exports = app;
 
 app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 )
