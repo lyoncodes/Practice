@@ -1,5 +1,4 @@
 'use strict'
-
 let reference = require('./dependency');
 
 const client = new reference.pg.Client(process.env.DATABASE_URL);
