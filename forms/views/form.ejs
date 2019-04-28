@@ -1,0 +1,34 @@
+<div class="guest-div">
+  <form name="guest-form" class="guest-form" method="POST" action="/guest/add">
+    <input type="text" name="firstname" placeholder="First Name"/>
+    <input type="text" name="lastname" placeholder="Last Name"/>
+    <input type="email" name="email" placeholder="Email" />
+    <input type="tel" id="phone" name="telephone" placeholder="(206)-xxx-xxxx" 
+    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+    <div id="guest-checkbox">
+      <input class="floor" id="check-box" type="checkbox" name="floorplan" value="studio"/>
+      <label for="check-box" class="message">Studio
+    
+      <input class="floor" id="check-box" type="checkbox" name="floorplan" value="open 1-br" />
+      <label for="check-box" class="message">Open 1-BR
+    
+      <input class="floor" id="check-box" type="checkbox" name="floorplan" value="1-bedroom">
+      <label for="check-box" class="message">1-Bedroom
+        
+      <input class="floor" id="check-box" type="checkbox" name="floorplan" value="1-bedroom + den"/>
+      <label for="check-box" class="message">1-Bedroom +
+    
+      <input class="floor" id="check-box" type="checkbox" name="floorplan" value="2-bedroom"/>
+      <label for="check-box" class="message">2-Bedroom
+
+      <input class="floor" id="check-box" type="checkbox" name="floorplan"
+      value="MFTE"/>
+      <label for="check-box" id="mfte" class="message">MFTE
+    </div>
+  
+    <input type="month" name="movein" value="Move-in Date"/>
+    <input type="number" name="price" placeholder="Price Range"min="1000.00" max="9999.00" step="10.00"/>
+    <button type="submit" name="submit">create guest</button>
+  </form>
+</div>
+

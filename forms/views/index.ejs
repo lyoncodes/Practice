@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <%- include('../views/head.ejs'); %>
+</head>
+<body>
+  <div class="container">
+
+    <div class="entry-pop-up">
+      <h1>Guest added to database</h1>
+      <img src="../styles/img/checked.png">
+    </div>
+
+   <div class="form">
+      <h1><%= topicHead %></h1>
+      <h2>Walk-In Guest / <a href="#" id="vendor-a">Vendor Form</a> / <a href="#" id="guest-a">Search Guest</a></h2>
+    <%- include('../views/search.ejs') %>
+      <br>
+     <%- include('../views/form.ejs') %>
+     <br>
+       <%- include('../views/form2.ejs') %>
+        <%- include('../views/visited.ejs') %>
+   </div>
+  </div>
+
+ <%- include('../views/footer.ejs') %>
+ <%- include('../views/jquery.ejs') %>
+</body>
+</html>

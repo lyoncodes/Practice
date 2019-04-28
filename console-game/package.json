@@ -1,0 +1,17 @@
+{
+  "name": "console-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node play",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "play": "^0.5.0",
+    "snekjs": "^1.0.4",
+    "yarn": "^1.15.2"
+  }
+}

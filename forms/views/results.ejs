@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <%- include('../views/head.ejs'); %>
+</head>
+<div class="container">
+ <h1>Guest Info Saved:</h1>
+ <div class="form">
+  <form action="/" method="GET">
+   <p class="message"><%= userValue.firstname %> <%= userValue.lastname %></p>
+   <p class="message"><%= userValue.email %> , <%= userValue.telephone %></p>
+   <p class="message"><%= userValue.floorplan %> <%= userValue.moveIn %></p>
+   <p class="message"><%= userValue.price %></p>
+   <button type="submit" name="submit">Back to Home</button>
+  </form>
+ </div>
+ 

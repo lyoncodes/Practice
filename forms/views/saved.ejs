@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <%- include('../views/head.ejs'); %>
+</head>
+<body>
+  <% if(userValue.classification === 'vendor') { %>
+    <%- include('../views/vendorView') %>
+  <% } %>
+  <% if(userValue.classification === 'guest') { %>
+    <%- include('../views/results') %>
+  <% } %>
+</body>

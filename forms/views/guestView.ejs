@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+  <%- include('../views/head.ejs'); %>
+</head>
+<body>
+ <span>
+  <div class="form">
+   <h1>Search Results</h1>
+   <p class="message">
+     <% guests.forEach(guest => { %></p>
+    <p class="message">
+     <%= guest.firstname %>
+     <%= guest.lastname %></p>
+    <p class="message">
+      <%= guest.email %>,
+      <%= guest.telephone %>
+    </p>
+    <p class="message">
+      <%= guest.floorplan %></p>
+    <p class="message">
+      <%= guest.moveIn %></p>
+    <p class="message">
+      <%= guest.price %>
+      <% }) %>
+     </p>
+   <form name="form2" method="GET" action="/">
+    <button type="submit" name="submit">Back to Forms</button>
+   </form>
+  </div>
+ </span>
+ <%- include('../views/footer.ejs') %>
+ <%- include('../views/jquery.ejs') %>
+</body>
+</html>
