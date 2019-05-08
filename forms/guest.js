@@ -1,6 +1,6 @@
 'use strict'
-// Objects
-module.exports.Guest = (obj) => {
+
+function Guest (obj) {
  this.classification = "guest"
  this.firstname = obj.firstname ? obj.firstname : 'n/a',
  this.lastname = obj.lastname ? obj.lastname : 'n/a',
@@ -11,7 +11,7 @@ module.exports.Guest = (obj) => {
  this.price = obj.price ? obj.price : 'n/a'
 }
 
-module.exports.Vendor = (obj) => {
+function Vendor (obj) {
  this.classification = "vendor"
  this.company = obj.company,
  this.fname = obj.fname,
@@ -19,4 +19,9 @@ module.exports.Vendor = (obj) => {
  this.service = obj.service,
  this.date = obj.serviceDate,
  this.note = obj.note
+}
+
+module.exports = {
+ Guest: Guest,
+ Vendor: Vendor
 }

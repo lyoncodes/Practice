@@ -39,11 +39,11 @@ gameDate accepts MM-DD-YYYY. The value 4-10 is a placeholder to get example data
 function homeFeed (req, res) {
   let newDay = new Date();
   let today = new Day(newDay);
-  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: "04-10-2019"})
+  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: `${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
     console.log(games)
-    res.render('index')
+    res.render('index', {games})
   })
 }
 

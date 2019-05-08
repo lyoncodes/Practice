@@ -1,27 +1,23 @@
 'use strict'
-// Node Dependency
-let dependencies = require('./dependency');
-let postgres = require('./postgres');
-let view = require('./viewengine');
-let guests = require('./guest')
-let search = require('./server/router/routes/search')
 
-const express = dependencies.express;
-const pg = dependencies.pg;
-const parser = dependencies.parser;
-const dotenv = dependencies.dotenv;
+// Node Dependency
+const express = require('express')
+const pg = require('pg')
+const parser = require('body-parser')
+
+require('dotenv').config()
 
 // Build HTTP Server
-const app = dependencies.server;
+const app = express();
 const appName = "Day Today"
 
 //PORT
 const PORT = process.env.PORT || 3000;
 
 // Database Setup
-const client = postgres.client;
-const connect = postgres.connect;
-const error = postgres.error;
+const client = new pg.Client(process.env.DATABASE_URL)
+client.connect()
+client.on('error', err => console.log(err))
 
 // Set the view engine
 app.set('view engine', 'ejs')
@@ -30,13 +26,15 @@ app.use(express.static('./public'))
 app.use(parser.json())
 
 // Routes
-app.get('/', home)
-app.post('/guest/add', addGuest)
-app.post('/vendor/add', addVendor)
-app.post('/searches', searchGuest)
-app.post('/searchByPrice', searchByPrice)
-app.get('/*', errorFunction)
-
+function engage () {
+  app.get('/', home)
+  app.post('/guest/add', addGuest)
+  app.post('/vendor/add', addVendor)
+  app.post('/searches', searchGuest)
+  app.post('/searchByPrice', searchByPrice)
+  app.get('/*', errorFunction)
+}
+engage();
 
 // GET route READ functions
 function home (req, res) {
@@ -45,7 +43,7 @@ function home (req, res) {
   .then(data => {
     let result = data.rows;
     let guestArr = []
-    for (let i = result.length-5; i < result.length; i ++) {
+    for (let i = result.length-6; i < result.length; i ++) {
       guestArr.push(result[i])
     }
     let guests = guestArr.map(el => new Guest(el))
@@ -56,26 +54,23 @@ function home (req, res) {
   })  
 }
 
-let searchGuest = search.searchGuest;
-console.log(searchGuest);
-
-// function searchGuest (req, res) {
-//   let searchName = req.body.searchName;
-//   let searchEmail = req.body.searchEmail;
-//   let moveIn = req.body.searchMoveIn;
-//   let searchFloor = req.body.floorplan;
-//   let SQL = `SELECT * FROM guests WHERE lastname=$1 OR email=$2 OR movein=$3 OR floorplan=$4`
-//   let values = [searchName, searchEmail, moveIn, searchFloor]
-//   return client.query(SQL, values)
-//   .then(data => {
-//     let guests = data.rows.map(el => new Guest(el))
-//     console.log(guests)
-//     res.render('guestView', {
-//       topicHead: `${appName}`,
-//       guests: guests
-//     })
-//   })
-// }
+function searchGuest (req, res) {
+  let searchName = req.body.searchName;
+  let searchEmail = req.body.searchEmail;
+  let moveIn = req.body.searchMoveIn;
+  let searchFloor = req.body.floorplan;
+  let SQL = `SELECT * FROM guests WHERE lastname=$1 OR email=$2 OR movein=$3 OR floorplan=$4`
+  let values = [searchName, searchEmail, moveIn, searchFloor]
+  return client.query(SQL, values)
+  .then(data => {
+    let guests = data.rows.map(el => new Guest(el))
+    console.log(guests)
+    res.render('guestView', {
+      topicHead: `${appName}`,
+      guests: guests
+    })
+  })
+}
 
 function searchByPrice (req, res) {
   // return all results where col price is $500 greater than and $500 less than searchPrice
@@ -126,17 +121,29 @@ function addVendor (req, res) {
 }
 
 // Operators & Normalizers
-// function normalizePhone(number) {
-
-// }
-
-function increment (thing) {
-  return thing++;
-}
 
 // Objects
-let Guest = guests.Guest;
-let Vendor = guests.Vendor;
+function Guest (obj) {
+  this.classification = "guest"
+  this.firstname = obj.firstname ? obj.firstname : 'n/a',
+  this.lastname = obj.lastname ? obj.lastname : 'n/a',
+  this.email = obj.email ? obj.email : 'n/a',
+  this.telephone = obj.telephone ? obj.telephone : 'n/a',
+  this.floorplan = obj.floorplan ? obj.floorplan : 'n/a',
+  this.movein = obj.movein ? obj.movein : 'n/a',
+  this.price = obj.price ? obj.price : 'n/a'
+}
+
+function Vendor (obj) {
+  this.classification = "vendor"
+  this.company = obj.company,
+  this.fname = obj.fname,
+  this.lname = obj.laname,
+  this.service = obj.service,
+  this.date = obj.serviceDate,
+  this.note = obj.note
+}
+
 
 // Error Handling Functions
 function errorFunction (req, res) {
@@ -148,14 +155,15 @@ function handleError(err, res) {
   if (res) res.status(500).render('error')
 }
 
+// App Listener
 app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 )
 
 
 
-/**TODO
+/* TODO
+
  * Organize routers for each route and seperate using modules
- * Modularize functions and object constructors
  * Note Field for Vendors
       * include note field
  * Form Validation
@@ -163,6 +171,6 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
       * add method to convert company entry to lowercase
       * add method to parse phone #s for regex ease
  * Search by MFTE
-
  * Fuzzy search by name
+
 */
