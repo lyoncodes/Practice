@@ -31,7 +31,6 @@ function handleError (res) {
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer)
 
-// `${today.month} - ${today.day} - ${today.year}`
 // GET functions
 function homeFeed (req, res) {
   let newDay = new Date();
@@ -39,22 +38,23 @@ function homeFeed (req, res) {
   NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: `${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
-    console.log(games)
+    // console.log(games)
     res.render('index', {games})
   })
 }
 
 // searchPlayer & POST functions
 function searchPlayer (req, res) {
+  let newDay = new Date();
+  let today = new Day(newDay);
   let query = `${req.body.firstname} ${req.body.lastname}`
   query = query.toLowerCase();
   const player = NBA.findPlayer(query)
-  console.log(player)
 
       NBA.stats.playerInfo({ PlayerID: player.playerId })
       .then (result => {
         let newPlayer = new Player(result)
-        
+
         NBA.stats.playerSplits({ PlayerID: player.playerId })
         .then (result => {
           let newPlayerSplits = new PlayerSplits(result)
@@ -63,6 +63,10 @@ function searchPlayer (req, res) {
           .then (result => {
             let newPlayerCareerSplits = new PlayerCareerSplits(result)
             
+            NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "5" })
+            .then (result => {
+              console.log(result.shot_Chart_Detail[result.shot_Chart_Detail.length-1]);
+            })
   res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})                    
         })
       })
@@ -159,3 +163,4 @@ app.listen(PORT, () => {
     * Render All Seasons to Table
   * Advaned Analytics -- SynergyTeamsPlayTypeStats
 */
+// I'm in napa!
