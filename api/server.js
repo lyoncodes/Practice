@@ -58,16 +58,17 @@ function searchPlayer (req, res) {
         NBA.stats.playerSplits({ PlayerID: player.playerId })
         .then (result => {
           let newPlayerSplits = new PlayerSplits(result)
-          
+
           NBA.stats.playerProfile({ PlayerID: player.playerId })
           .then (result => {
             let newPlayerCareerSplits = new PlayerCareerSplits(result)
-            
-            NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "5" })
+
+            NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "1" })
             .then (result => {
-              console.log(result.shot_Chart_Detail[result.shot_Chart_Detail.length-1]);
+              let data = result.shot_Chart_Detail
+              
+              res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, data: data})
             })
-  res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})                    
         })
       })
    })
@@ -141,6 +142,23 @@ function Feed (obj) {
   this.final = obj.pts;
 }
 
+function PlayerFeed (obj) {
+  this.id = obj.gameId;
+  this.qtr = obj.period;
+  this.event = obj.eventType;
+  this.play = obj.actionType;
+  this.shot = obj.shotType;
+  this.zone = obj.shotZoneRange;
+}
+
+function shotChart (obj) {
+  this.shotType = obj.shotType;
+  this.shotZoneBasic = obj.shotZoneBasic;
+  this.shotZoneArea = obj.shotZoneArea;
+  this.shotDistance = obj.shotDistance;
+  this.locX = obj.locX;
+  this.locY = obj.locY;
+}
 // Listen
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
