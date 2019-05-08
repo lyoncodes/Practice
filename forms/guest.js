@@ -11,6 +11,17 @@ function Guest (obj) {
  this.price = obj.price ? obj.price : 'n/a'
 }
 
+function Vendor (obj) {
+ this.classification = "vendor"
+ this.company = obj.company,
+ this.fname = obj.fname,
+ this.lname = obj.laname,
+ this.service = obj.service,
+ this.date = obj.serviceDate,
+ this.note = obj.note
+}
+
 module.exports = {
- Guest: Guest
+ Guest: Guest,
+ Vendor: Vendor
 }

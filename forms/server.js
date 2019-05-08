@@ -4,6 +4,7 @@ let dependencies = require('./dependency');
 let postgres = require('./postgres');
 let view = require('./viewengine');
 let guests = require('./guest')
+let search = require('./server/router/routes/search')
 
 const express = dependencies.express;
 const pg = dependencies.pg;
@@ -29,15 +30,13 @@ app.use(express.static('./public'))
 app.use(parser.json())
 
 // Routes
-function engage () {
-  app.get('/', home)
-  app.post('/guest/add', addGuest)
-  app.post('/vendor/add', addVendor)
-  app.post('/searches', searchGuest)
-  app.post('/searchByPrice', searchByPrice)
-  app.get('/*', errorFunction)
-}
-engage();
+app.get('/', home)
+app.post('/guest/add', addGuest)
+app.post('/vendor/add', addVendor)
+app.post('/searches', searchGuest)
+app.post('/searchByPrice', searchByPrice)
+app.get('/*', errorFunction)
+
 
 // GET route READ functions
 function home (req, res) {
@@ -56,24 +55,27 @@ function home (req, res) {
       })
   })  
 }
-function searchGuest (req, res) {
-  let searchName = req.body.searchName;
-  
-  let searchEmail = req.body.searchEmail;
-  let moveIn = req.body.searchMoveIn;
-  let searchFloor = req.body.floorplan;
-  let SQL = `SELECT * FROM guests WHERE lastname=$1 OR email=$2 OR movein=$3 OR floorplan=$4`
-  let values = [searchName, searchEmail, moveIn, searchFloor]
-  return client.query(SQL, values)
-  .then(data => {
-    let guests = data.rows.map(el => new Guest(el))
-    console.log(guests)
-    res.render('guestView', {
-      topicHead: `${appName}`,
-      guests: guests
-    })
-  })
-}
+
+let searchGuest = search.searchGuest;
+console.log(searchGuest);
+
+// function searchGuest (req, res) {
+//   let searchName = req.body.searchName;
+//   let searchEmail = req.body.searchEmail;
+//   let moveIn = req.body.searchMoveIn;
+//   let searchFloor = req.body.floorplan;
+//   let SQL = `SELECT * FROM guests WHERE lastname=$1 OR email=$2 OR movein=$3 OR floorplan=$4`
+//   let values = [searchName, searchEmail, moveIn, searchFloor]
+//   return client.query(SQL, values)
+//   .then(data => {
+//     let guests = data.rows.map(el => new Guest(el))
+//     console.log(guests)
+//     res.render('guestView', {
+//       topicHead: `${appName}`,
+//       guests: guests
+//     })
+//   })
+// }
 
 function searchByPrice (req, res) {
   // return all results where col price is $500 greater than and $500 less than searchPrice
@@ -134,27 +136,7 @@ function increment (thing) {
 
 // Objects
 let Guest = guests.Guest;
-
-// function Guest (obj) {
-//   this.classification = "guest"
-//   this.firstname = obj.firstname ? obj.firstname : 'n/a',
-//   this.lastname = obj.lastname ? obj.lastname : 'n/a',
-//   this.email = obj.email ? obj.email : 'n/a',
-//   this.telephone = obj.telephone ? obj.telephone : 'n/a',
-//   this.floorplan = obj.floorplan ? obj.floorplan : 'n/a',
-//   this.movein = obj.movein ? obj.movein : 'n/a',
-//   this.price = obj.price ? obj.price : 'n/a'
-// }
-
-function Vendor (obj) {
-  this.classification = "vendor"
-  this.company = obj.company,
-  this.fname = obj.fname,
-  this.lname = obj.laname,
-  this.service = obj.service,
-  this.date = obj.serviceDate,
-  this.note = obj.note
-}
+let Vendor = guests.Vendor;
 
 // Error Handling Functions
 function errorFunction (req, res) {
@@ -173,6 +155,7 @@ app.listen(PORT, () => console.log(`app is listening on PORT ${PORT}`)
 
 /**TODO
  * Organize routers for each route and seperate using modules
+ * Modularize functions and object constructors
  * Note Field for Vendors
       * include note field
  * Form Validation
