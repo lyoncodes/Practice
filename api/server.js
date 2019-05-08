@@ -31,33 +31,30 @@ function handleError (res) {
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer)
 
-// `${today.month} - ${today.day} - ${today.year}`
 // GET functions
-/*
-gameDate accepts MM-DD-YYYY. The value 4-10 is a placeholder to get example data. Based on the response body, we need to render games IF they match the values stored in the array at the end of the response 
-*/
 function homeFeed (req, res) {
   let newDay = new Date();
   let today = new Day(newDay);
   NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: `${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
-    console.log(games)
+    // console.log(games)
     res.render('index', {games})
   })
 }
 
 // searchPlayer & POST functions
 function searchPlayer (req, res) {
+  let newDay = new Date();
+  let today = new Day(newDay);
   let query = `${req.body.firstname} ${req.body.lastname}`
   query = query.toLowerCase();
   const player = NBA.findPlayer(query)
-  console.log(player)
 
       NBA.stats.playerInfo({ PlayerID: player.playerId })
       .then (result => {
         let newPlayer = new Player(result)
-        
+
         NBA.stats.playerSplits({ PlayerID: player.playerId })
         .then (result => {
           let newPlayerSplits = new PlayerSplits(result)
@@ -66,6 +63,10 @@ function searchPlayer (req, res) {
           .then (result => {
             let newPlayerCareerSplits = new PlayerCareerSplits(result)
             
+            NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "5" })
+            .then (result => {
+              console.log(result.shot_Chart_Detail[result.shot_Chart_Detail.length-1]);
+            })
   res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits})                    
         })
       })
