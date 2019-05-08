@@ -26,7 +26,6 @@ app.use(express.static('./public'))
 app.use(parser.json())
 
 // Routes
-
 function engage () {
   app.get('/', home)
   app.post('/guest/add', addGuest)
@@ -57,7 +56,6 @@ function home (req, res) {
 
 function searchGuest (req, res) {
   let searchName = req.body.searchName;
-  
   let searchEmail = req.body.searchEmail;
   let moveIn = req.body.searchMoveIn;
   let searchFloor = req.body.floorplan;
