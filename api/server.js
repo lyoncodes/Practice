@@ -36,7 +36,7 @@ app.post('/player/search', searchPlayer)
 function homeFeed (req, res) {
   let newDay = new Date();
   let today = new Day(newDay);
-  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: "04-10-2019"})
+  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: `${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
     console.log(games)
