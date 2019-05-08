@@ -40,7 +40,7 @@ function homeFeed (req, res) {
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
     console.log(games)
-    res.render('index')
+    res.render('index', {games})
   })
 }
 
