@@ -18,6 +18,11 @@ a{
  height: 10em;
  background: #41B6E6;
 }
+.feed{
+ font-size: 12px;
+ max-height: 140px;
+ overflow: scroll;
+}
 
 /* Table Styling */
 table{

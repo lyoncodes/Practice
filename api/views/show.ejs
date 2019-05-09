@@ -77,10 +77,13 @@
    </tbody>
   </table>
  </div>
- <div>
-   <% data.forEach(feed => { %>
-    <p><%= feed.gameId %></p>
-   <% }) %>
+
+ <h3>Player Feed</h3>
+ <div class="feed">
+  <% data.forEach(feed => { %>
+     <p><%= feed.minutesRemaining %>:<%= feed.secondsRemaining %> - <%= feed.period %> <%= feed.actionType %>, <%= feed.eventType %></p>
+  <% }) %>
  </div>
+
 </body>
 </html>
