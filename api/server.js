@@ -31,22 +31,27 @@ function handleError (res) {
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer)
 
-// GET functions
-function homeFeed (req, res) {
+// Global Operators
+function dayToday () {
   let newDay = new Date();
   let today = new Day(newDay);
+  return today
+}
+
+// GET functions
+function homeFeed (req, res) {
+  let today = dayToday();
   NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: `${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
-    // console.log(games)
-    res.render('index', {games})
+    console.log(games)
+    res.render('index')
   })
 }
 
 // searchPlayer & POST functions
 function searchPlayer (req, res) {
-  let newDay = new Date();
-  let today = new Day(newDay);
+  let today = dayToday();
   let query = `${req.body.firstname} ${req.body.lastname}`
   query = query.toLowerCase();
   const player = NBA.findPlayer(query)
@@ -66,7 +71,7 @@ function searchPlayer (req, res) {
             NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "1" })
             .then (result => {
               let data = result.shot_Chart_Detail
-              
+
               res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, data: data})
             })
         })
