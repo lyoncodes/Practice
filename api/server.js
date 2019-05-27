@@ -22,7 +22,7 @@ app.set('view engine', 'ejs')
 app.use(parser.urlencoded({ extended: true }))
 app.use(express.static('./public'))
 
-//Error Handling
+// Middleware & Error Handling
 function handleError (res) {
  res.status(400).send('400 error')
 }
@@ -41,17 +41,16 @@ function dayToday () {
 // GET functions
 function homeFeed (req, res) {
   let today = dayToday();
-  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: `${today.month} - ${today.day} - ${today.year}`})
+  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: '04-10-2019'})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
-    console.log(games)
-    res.render('index')
+    console.log(games);
+    res.render('index', {result: result, games: games})
   })
 }
 
 // searchPlayer & POST functions
 function searchPlayer (req, res) {
-  let today = dayToday();
   let query = `${req.body.firstname} ${req.body.lastname}`
   query = query.toLowerCase();
   const player = NBA.findPlayer(query)
@@ -172,7 +171,12 @@ app.listen(PORT, () => {
 /* TODO:
 
 // TASKS
-* Refactor search function
+* Style homepage
+* Refactor functions with module.exports
+  * Objects
+  * Operators
+* Refactor search function with async await
+* Add conference standings to home page & add conditionals if no feed is available
 
 // FEATURES
 * Transaction Feed on Front page
@@ -186,4 +190,3 @@ app.listen(PORT, () => {
     * Render All Seasons to Table
   * Advaned Analytics -- SynergyTeamsPlayTypeStats
 */
-// I'm in napa!
