@@ -1,13 +1,8 @@
-<div>
- <%= games[0].team %>
- <%= games[0].final %>
- <%= games[1].final %>
- <%= games[1].team %>
-</div>
-<div>
- <%= games[2].team %>
- <%= games[2].final %>
- <%= games[3].final %>
- <%= games[3].team %>
-</div>
+<% games.forEach(game => { %>
+ <div>
+  <p><%= game.team %></p>
+  <p><%= game.final %></p>
+ </div>
+<% }) %>
+
 

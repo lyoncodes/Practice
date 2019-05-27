@@ -7,5 +7,14 @@
 <div class="search-form">
   <%- include('../views/form.ejs') %>
 </div>
+<% if (result.lineScore.length === 0) { %>
+<div class="feed-error">
+  <h1>No Games Today!</h1>
+</div>
+<% } else { %>
+<div class="feed">
+  <%- include('../views/feed.ejs') %>
+</div>
+<% }; %>
 </body>
 </html>
