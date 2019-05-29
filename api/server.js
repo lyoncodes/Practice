@@ -41,6 +41,7 @@ function asyncHandler(callback) {
 // Routes
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer)
+app.post('/player/search', scoring)
 
 // Global Operators
 function dayToday () {
@@ -76,19 +77,21 @@ function searchPlayer (req, res) {
           NBA.stats.playerProfile({ PlayerID: player.playerId })
           .then (result => {
             let newPlayerCareerSplits = new PlayerCareerSplits(result)
+            let scoringTrend = scoring(newPlayerSplits.ppg, newPlayerCareerSplits.ppg)
 
             NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "1" })
             .then (result => {
               let data = result.shot_Chart_Detail
-
-              res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, data: data})
+              res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, scoringTrend, data: data})
             })
         })
       })
    })
 }
 
-
+function scoring(careerAvg, seasonAvg) {
+    return careerAvg - seasonAvg;
+}
 
 // Objects
 const Day = objects.Day;
@@ -98,8 +101,7 @@ const PlayerCareerSplits = objects.PlayerCareerSplits;
 const Feed = objects.Feed;
 const PlayerFeed = objects.PlayerFeed;
 const shotChart = objects.shotChart;
-console.log(PlayerFeed)
-console.log(shotChart)
+
 // Listen
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
@@ -110,7 +112,6 @@ app.listen(PORT, () => {
 // TASKS
 * Style homepage
 * Refactor functions with module.exports
-  * Objects
   * Operators
 * Refactor search function with async await
 * Add conference standings to home page
