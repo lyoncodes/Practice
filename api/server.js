@@ -6,6 +6,7 @@ const superagent = require('superagent');
 const parser = require('body-parser');
 const NBA = require('nba');
 const NBAclient = require('nba-api-client');
+const objects = require('./objects');
 
 
 // Load environment variables
@@ -27,6 +28,16 @@ function handleError (res) {
  res.status(400).send('400 error')
 }
 
+function asyncHandler(callback) {
+  return async(req, res, next) => {
+    try {
+      callback(req, res, next);
+    } catch(err) {
+        res.send('YOU DIED')
+    }
+  }
+}
+
 // Routes
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer)
@@ -41,10 +52,9 @@ function dayToday () {
 // GET functions
 function homeFeed (req, res) {
   let today = dayToday();
-  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate: '04-10-2019'})
+  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate:`${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
     let games = result.lineScore.map(games => new Feed(games))
-    console.log(games);
     res.render('index', {result: result, games: games})
   })
 }
@@ -80,89 +90,16 @@ function searchPlayer (req, res) {
 
 
 
-// Objects 
-function Day (date) {
-  this.year = date.getFullYear();
-  this.month = (date.getMonth() + 1);
-  this.day = date.getDate();
-} 
-
-function Player (obj) {
- this.id = obj.commonPlayerInfo[0].personId;
- this.name = obj.commonPlayerInfo[0].displayFirstLast;
- this.position = obj.commonPlayerInfo[0].position;
- this.height = obj.commonPlayerInfo[0].height;
- this.weight = obj.commonPlayerInfo[0].weight;
- this.jersey = obj.commonPlayerInfo[0].jersey;
- this.team = obj.commonPlayerInfo[0].teamName;
- this.draftYear = obj.commonPlayerInfo[0].draftYear;
- this.draftRound = obj.commonPlayerInfo[0].draftRound;
- this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
- this.college = obj.commonPlayerInfo[0].school;
-}
-
-function PlayerSplits (obj) {
- this.season = obj.overallPlayerDashboard[0].groupValue;
- this.gp = obj.overallPlayerDashboard[0].gp;
- this.mpg = obj.overallPlayerDashboard[0].min;
- this.fgPct = obj.overallPlayerDashboard[0].fgPct;
- this.fg3Pct = obj.overallPlayerDashboard[0].fg3Pct;
- this.ftPct = obj.overallPlayerDashboard[0].ftPct;
- this.reb = obj.overallPlayerDashboard[0].dreb;
- this.oreb = obj.overallPlayerDashboard[0].oreb;
- this.ast = obj.overallPlayerDashboard[0].ast;
- this.blk = obj.overallPlayerDashboard[0].blk;
- this.stl = obj.overallPlayerDashboard[0].stl;
- this.to = obj.overallPlayerDashboard[0].tov;
- this.pf = obj.overallPlayerDashboard[0].pf;
- this.ppg = obj.overallPlayerDashboard[0].pts;
- this.plusMinus = obj.overallPlayerDashboard[0].plusMinus
-}
-
-function PlayerCareerSplits (obj) {
-  this.gp = obj.careerTotalsRegularSeason[0].gp;
-  this.mpg = obj.careerTotalsRegularSeason[0].min;
-  this.fgPct = obj.careerTotalsRegularSeason[0].fgPct;
-  this.fg3Pct = obj.careerTotalsRegularSeason[0].fg3Pct;
-  this.ftPct = obj.careerTotalsRegularSeason[0].ftPct;
-  this.reb = obj.careerTotalsRegularSeason[0].reb;
-  this.oreb = obj.careerTotalsRegularSeason[0].oreb;
-  this.ast = obj.careerTotalsRegularSeason[0].ast;
-  this.blk = obj.careerTotalsRegularSeason[0].blk;
-  this.stl = obj.careerTotalsRegularSeason[0].stl;
-  this.to = obj.careerTotalsRegularSeason[0].tov;
-  this.pf = obj.careerTotalsRegularSeason[0].pf;
-  this.ppg = obj.careerTotalsRegularSeason[0].pts
-}
-
-function Feed (obj) {
-  this.id = obj.gameId;
-  this.team = obj.teamAbbreviation;
-  this.record = obj.teamWinsLosses;
-  this.q1 = obj.ptsQtr1;
-  this.q2 = obj.ptsQtr2;
-  this.q3 = obj.ptsQtr3;
-  this.q4 = obj.ptsQtr4;
-  this.final = obj.pts;
-}
-
-function PlayerFeed (obj) {
-  this.id = obj.gameId;
-  this.qtr = obj.period;
-  this.event = obj.eventType;
-  this.play = obj.actionType;
-  this.shot = obj.shotType;
-  this.zone = obj.shotZoneRange;
-}
-
-function shotChart (obj) {
-  this.shotType = obj.shotType;
-  this.shotZoneBasic = obj.shotZoneBasic;
-  this.shotZoneArea = obj.shotZoneArea;
-  this.shotDistance = obj.shotDistance;
-  this.locX = obj.locX;
-  this.locY = obj.locY;
-}
+// Objects
+const Day = objects.Day;
+const Player = objects.Player;
+const PlayerSplits = objects.PlayerSplits;
+const PlayerCareerSplits = objects.PlayerCareerSplits;
+const Feed = objects.Feed;
+const PlayerFeed = objects.PlayerFeed;
+const shotChart = objects.shotChart;
+console.log(PlayerFeed)
+console.log(shotChart)
 // Listen
 app.listen(PORT, () => {
  console.log(`Listening on PORT: ${PORT}`)
@@ -176,7 +113,7 @@ app.listen(PORT, () => {
   * Objects
   * Operators
 * Refactor search function with async await
-* Add conference standings to home page & add conditionals if no feed is available
+* Add conference standings to home page
 
 // FEATURES
 * Transaction Feed on Front page
