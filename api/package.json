@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "chart.js": "^2.8.0",
+    "d3-shotchart": "0.0.2",
     "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",

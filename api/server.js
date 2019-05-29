@@ -40,8 +40,7 @@ function asyncHandler(callback) {
 
 // Routes
 app.get('/', homeFeed)
-app.post('/player/search', searchPlayer)
-app.post('/player/search', scoring)
+app.post('/player/search', searchPlayer, scoring)
 
 // Global Operators
 function dayToday () {
@@ -82,6 +81,7 @@ function searchPlayer (req, res) {
             NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "1" })
             .then (result => {
               let data = result.shot_Chart_Detail
+              console.log(data);
               res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, scoringTrend, data: data})
             })
         })
