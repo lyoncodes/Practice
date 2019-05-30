@@ -6,6 +6,9 @@ const superagent = require('superagent');
 const parser = require('body-parser');
 const NBA = require('nba');
 const NBAclient = require('nba-api-client');
+const d3 = require('d3');
+const dl = require('datalib');
+const request = require('request');
 const objects = require('./objects');
 
 
@@ -42,6 +45,9 @@ function asyncHandler(callback) {
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer, scoring)
 
+// Shot chart
+
+
 // Global Operators
 function dayToday () {
   let newDay = new Date();
@@ -76,12 +82,12 @@ function searchPlayer (req, res) {
           NBA.stats.playerProfile({ PlayerID: player.playerId })
           .then (result => {
             let newPlayerCareerSplits = new PlayerCareerSplits(result)
-            let scoringTrend = scoring(newPlayerSplits.ppg, newPlayerCareerSplits.ppg)
+            let scoringTrend = scoring(newPlayerSplits ,newPlayerCareerSplits)
 
             NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "1" })
             .then (result => {
               let data = result.shot_Chart_Detail
-              console.log(data);
+              // install shot chart function here
               res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, scoringTrend, data: data})
             })
         })
@@ -89,9 +95,16 @@ function searchPlayer (req, res) {
    })
 }
 
-function scoring(careerAvg, seasonAvg) {
-    return careerAvg - seasonAvg;
+
+function scoring(seasonAvg, careerAvg) {
+  let result = [];
+  let ppgDiff = seasonAvg.ppg - careerAvg.ppg;
+  let rebDiff = seasonAvg.reb - careerAvg.reb;
+  let astDiff = seasonAvg.ast - careerAvg.ast;
+  result.push(ppgDiff, rebDiff, astDiff);
+  return result
 }
+
 
 // Objects
 const Day = objects.Day;
@@ -127,4 +140,6 @@ app.listen(PORT, () => {
     2. Request all seasons until current
     * Render All Seasons to Table
   * Advaned Analytics -- SynergyTeamsPlayTypeStats
+* Add Shotchart
+  * 
 */

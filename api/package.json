@@ -12,7 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "chart.js": "^2.8.0",
+    "d3": "^5.9.2",
+    "d3-hexbin": "^0.2.2",
     "d3-shotchart": "0.0.2",
+    "d3-tip": "^0.9.1",
+    "datalib": "^1.9.2",
     "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
