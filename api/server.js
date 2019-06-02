@@ -9,6 +9,7 @@ const NBAclient = require('nba-api-client');
 const d3 = require('d3');
 const dl = require('datalib');
 const request = require('request');
+
 const objects = require('./objects');
 
 
@@ -27,26 +28,10 @@ app.use(parser.urlencoded({ extended: true }))
 app.use(express.static('./public'))
 
 // Middleware & Error Handling
-function handleError (res) {
- res.status(400).send('400 error')
-}
-
-function asyncHandler(callback) {
-  return async(req, res, next) => {
-    try {
-      callback(req, res, next);
-    } catch(err) {
-        res.send('YOU DIED')
-    }
-  }
-}
 
 // Routes
 app.get('/', homeFeed)
 app.post('/player/search', searchPlayer, scoring)
-
-// Shot chart
-
 
 // Global Operators
 function dayToday () {
@@ -65,37 +50,65 @@ function homeFeed (req, res) {
   })
 }
 
-// searchPlayer & POST functions
-function searchPlayer (req, res) {
-  let query = `${req.body.firstname} ${req.body.lastname}`
-  query = query.toLowerCase();
-  const player = NBA.findPlayer(query)
-
-      NBA.stats.playerInfo({ PlayerID: player.playerId })
-      .then (result => {
-        let newPlayer = new Player(result)
-
-        NBA.stats.playerSplits({ PlayerID: player.playerId })
-        .then (result => {
-          let newPlayerSplits = new PlayerSplits(result)
-
-          NBA.stats.playerProfile({ PlayerID: player.playerId })
-          .then (result => {
-            let newPlayerCareerSplits = new PlayerCareerSplits(result)
-            let scoringTrend = scoring(newPlayerSplits ,newPlayerCareerSplits)
-
-            NBA.stats.shots({ PlayerID: player.playerId, SeasonType: "Playoffs", LastNGames: "1" })
-            .then (result => {
-              let data = result.shot_Chart_Detail
-              // install shot chart function here
-              res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, scoringTrend, data: data})
-            })
-        })
-      })
-   })
+function queryHandler(inputStr) {
+  let query = `${inputStr.body.firstname} ${inputStr.body.lastname}`
+  return query.toLowerCase();
 }
 
+// searchPlayer & POST functions
+function searchPlayer (req, res) {
+  let query = queryHandler(req);
+  const player = NBA.findPlayer(query)
 
+  const id = player.playerId;
+  const season = 'Playoffs';
+  const games = '1';
+
+    fetchInfo(id)
+      .then (result => {
+        let newPlayer = new Player(result)
+    fetchSplits(id)
+      .then (result => {
+        let newPlayerSplits = new PlayerSplits(result)
+    fetchProfile(id)
+      .then (result => {
+        let newPlayerCareerSplits = new PlayerCareerSplits(result)
+        let scoringTrend = scoring(newPlayerSplits,newPlayerCareerSplits)
+    fetchShotChart(id, season, games)
+      .then (result => {
+        let data = result.shot_Chart_Detail
+    // renderShotChart(data)
+    // install shot chart function here
+  res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, scoringTrend, data})
+                  })
+              })
+          })
+      })
+  .catch(error => console.log('something is wrong -> :', error))
+}
+
+// fetch functions
+
+function fetchInfo(id){
+  return NBA.stats.playerInfo({PlayerID: `${id}`})
+}
+
+function fetchSplits(id){
+  return NBA.stats.playerSplits({PlayerID: `${id}`})
+}
+
+function fetchProfile(id){
+  return NBA.stats.playerProfile({PlayerID: `${id}`})
+}
+
+function fetchShotChart(id, season, games){
+  return NBA.stats.shots({
+    PlayerID: `${id}`,
+    SeasonType: `${season}`,
+    LastNGames: `${games}`,
+  })
+}
+// operator functions
 function scoring(seasonAvg, careerAvg) {
   let result = [];
   let ppgDiff = seasonAvg.ppg - careerAvg.ppg;
@@ -106,7 +119,7 @@ function scoring(seasonAvg, careerAvg) {
 }
 
 
-// Objects
+// Object Assignments
 const Day = objects.Day;
 const Player = objects.Player;
 const PlayerSplits = objects.PlayerSplits;
@@ -136,10 +149,10 @@ app.listen(PORT, () => {
     2. Instantiate new object for front end by mapping obj.lineScore
 * Add Comparison Analytics
   * Player Career Stats
-    1. Request different season than current
-    2. Request all seasons until current
+    * if trend is +, display the text as green
+    * if trend is -, display the text as red
     * Render All Seasons to Table
   * Advaned Analytics -- SynergyTeamsPlayTypeStats
 * Add Shotchart
-  * 
+
 */
