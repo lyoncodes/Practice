@@ -5,20 +5,35 @@ function Day (date) {
  this.month = (date.getMonth() + 1);
  this.day = date.getDate();
 } 
+class Player {
+  constructor(obj) {
+    this.id = obj.commonPlayerInfo[0].personId;
+    this.name = obj.commonPlayerInfo[0].displayFirstLast;
+    this.position = obj.commonPlayerInfo[0].position;
+    this.height = obj.commonPlayerInfo[0].height;
+    this.weight = obj.commonPlayerInfo[0].weight;
+    this.jersey = obj.commonPlayerInfo[0].jersey;
+    this.team = obj.commonPlayerInfo[0].teamName;
+    this.draftYear = obj.commonPlayerInfo[0].draftYear;
+    this.draftRound = obj.commonPlayerInfo[0].draftRound;
+    this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
+    this.college = obj.commonPlayerInfo[0].school;
+  }
 
-function Player (obj) {
- this.id = obj.commonPlayerInfo[0].personId;
- this.name = obj.commonPlayerInfo[0].displayFirstLast;
- this.position = obj.commonPlayerInfo[0].position;
- this.height = obj.commonPlayerInfo[0].height;
- this.weight = obj.commonPlayerInfo[0].weight;
- this.jersey = obj.commonPlayerInfo[0].jersey;
- this.team = obj.commonPlayerInfo[0].teamName;
- this.draftYear = obj.commonPlayerInfo[0].draftYear;
- this.draftRound = obj.commonPlayerInfo[0].draftRound;
- this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
- this.college = obj.commonPlayerInfo[0].school;
 }
+// function Player (obj) {
+//  this.id = obj.commonPlayerInfo[0].personId;
+//  this.name = obj.commonPlayerInfo[0].displayFirstLast;
+//  this.position = obj.commonPlayerInfo[0].position;
+//  this.height = obj.commonPlayerInfo[0].height;
+//  this.weight = obj.commonPlayerInfo[0].weight;
+//  this.jersey = obj.commonPlayerInfo[0].jersey;
+//  this.team = obj.commonPlayerInfo[0].teamName;
+//  this.draftYear = obj.commonPlayerInfo[0].draftYear;
+//  this.draftRound = obj.commonPlayerInfo[0].draftRound;
+//  this.draftNumber = obj.commonPlayerInfo[0].draftNumber;
+//  this.college = obj.commonPlayerInfo[0].school;
+// }
 
 function PlayerSplits (obj) {
  this.season = obj.overallPlayerDashboard[0].groupValue;
