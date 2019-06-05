@@ -11,6 +11,7 @@ const dl = require('datalib');
 const request = require('request');
 
 const objects = require('./objects');
+const fetchers = require('./fetch');
 
 
 // Load environment variables
@@ -45,21 +46,21 @@ function homeFeed (req, res) {
   let today = dayToday();
   NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate:`${today.month} - ${today.day} - ${today.year}`})
   .then (result => {
+    console.log(result.lineScore);
     let games = result.lineScore.map(games => new Feed(games))
-    res.render('index', {result: result, games: games})
+    res.render('index', {result, games})
   })
 }
 
 function queryHandler(inputStr) {
-  let query = `${inputStr.body.firstname} ${inputStr.body.lastname}`
-  return query.toLowerCase();
+  let query = `${inputStr.body.firstname} ${inputStr.body.lastname}`;
+  query.toLowerCase();
+  return NBA.findPlayer(query)
 }
 
 // searchPlayer & POST functions
 function searchPlayer (req, res) {
-  let query = queryHandler(req);
-  const player = NBA.findPlayer(query)
-
+  const player = queryHandler(req);
   const id = player.playerId;
   const season = 'Playoffs';
   const games = '1';
@@ -78,6 +79,9 @@ function searchPlayer (req, res) {
       .then (result => {
         let data = result.shot_Chart_Detail
     // renderShotChart(data)
+      // .then (result => {
+      //   let chart = result.
+      // })
     // install shot chart function here
   res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, scoringTrend, data})
                   })
@@ -88,26 +92,11 @@ function searchPlayer (req, res) {
 }
 
 // fetch functions
+const fetchInfo = fetchers.fetchInfo;
+const fetchSplits = fetchers.fetchSplits;
+const fetchProfile = fetchers.fetchProfile;
+const fetchShotChart = fetchers.fetchShotChart;
 
-function fetchInfo(id){
-  return NBA.stats.playerInfo({PlayerID: `${id}`})
-}
-
-function fetchSplits(id){
-  return NBA.stats.playerSplits({PlayerID: `${id}`})
-}
-
-function fetchProfile(id){
-  return NBA.stats.playerProfile({PlayerID: `${id}`})
-}
-
-function fetchShotChart(id, season, games){
-  return NBA.stats.shots({
-    PlayerID: `${id}`,
-    SeasonType: `${season}`,
-    LastNGames: `${games}`,
-  })
-}
 // operator functions
 function scoring(seasonAvg, careerAvg) {
   let result = [];
@@ -137,16 +126,14 @@ app.listen(PORT, () => {
 
 // TASKS
 * Style homepage
-* Refactor functions with module.exports
+* Refactor functions with module.exports; router
   * Operators
-* Refactor search function with async await
 * Add conference standings to home page
 
 // FEATURES
 * Transaction Feed on Front page
   1. Create a date object and use it to render most recent transactions?
     * maybe start with brute force to get first 10 
-    2. Instantiate new object for front end by mapping obj.lineScore
 * Add Comparison Analytics
   * Player Career Stats
     * if trend is +, display the text as green
