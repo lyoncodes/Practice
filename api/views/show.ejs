@@ -12,9 +12,9 @@
  </div>
  <div class="stats">
   <p>drafted: <%= newPlayer.draftYear %> from: <%= newPlayer.college %></p>
-  <p class="differential">ppg: <%= scoringTrend[0] %></p>
-  <p class="differential">reb: <%= scoringTrend[1] %></p>
-  <p class="differential">ast: <%= scoringTrend[2] %></p>
+  <p class="differential">ppg: <%= trend[0] %></p>
+  <p class="differential">reb: <%= trend[1] %></p>
+  <p class="differential">ast: <%= trend[2] %></p>
  </div>
 
  <div class="tbl-header">
@@ -87,6 +87,5 @@
      <p><%= feed.minutesRemaining %>:<%= feed.secondsRemaining %> - <%= feed.period %> <%= feed.actionType %>, <%= feed.eventType %></p>
   <% }) %>
  </div>
-<%- include('../views/footer.ejs') %>
 </body>
 </html>
