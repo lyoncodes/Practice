@@ -22,8 +22,8 @@ function fetchShotChart(id, season, games){
 }
 
 module.exports = {
-  fetchInfo: fetchInfo,
-  fetchSplits: fetchSplits,
-  fetchProfile: fetchProfile,
-  fetchShotChart: fetchShotChart
+fetchInfo,
+fetchSplits,
+fetchProfile,
+fetchShotChart
 }

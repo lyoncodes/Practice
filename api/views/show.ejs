@@ -80,6 +80,30 @@
    </tbody>
   </table>
  </div>
+ <h1><%= seasonStats.gp %></h1>
+ <div class="tbl-content">
+   <table cellpadding="0" cellspacing="0" border="0">
+     <% seasonStats.forEach(season => { %>
+     <tbody>
+       <tr>
+         <td class="table-tabs"> <%= `${season.season}` %> </td>
+          <td><%= season.gp %></td>
+          <td><%= season.mpg %></td>
+          <td><%= season.fgPct %></td>
+          <td><%= season.fg3Pct %></td>
+          <td><%= season.ftPct %></td>
+          <td><%= season.reb %></td>
+          <td><%= season.oreb %></td>
+          <td><%= season.ast %></td>
+          <td><%= season.stl %></td>
+          <td><%= season.to %></td>
+          <td><%= season.ppg %></td>
+          <td><%= season.plusMinus %></td>
+          <% }) %>
+        </tr>
+   </tbody>
+  </table>
+ </div>
 
  <h3>Player Feed</h3>
  <div class="feed">

@@ -4,7 +4,8 @@ function Day (date) {
  this.year = date.getFullYear();
  this.month = (date.getMonth() + 1);
  this.day = date.getDate();
-} 
+}
+
 class Player {
   constructor(obj) {
     this.id = obj.commonPlayerInfo[0].personId;
@@ -55,6 +56,23 @@ function PlayerCareerSplits (obj) {
  this.ppg = obj.careerTotalsRegularSeason[0].pts
 }
 
+function seasonSplits (obj) {
+  this.season = obj.seasonId;
+ this.gp = obj.gp;
+ this.mpg = obj.min;
+ this.fgPct = obj.fgPct;
+ this.fg3Pct = obj.fg3Pct;
+ this.ftPct = obj.ftPct;
+ this.reb = obj.reb;
+ this.oreb = obj.oreb;
+ this.ast = obj.ast;
+ this.blk = obj.blk;
+ this.stl = obj.stl;
+ this.to = obj.tov;
+ this.pf = obj.pf;
+ this.ppg = obj.pts
+}
+
 function Feed (obj) {
   this.id = obj.gameId;
   this.team = obj.teamAbbreviation;
@@ -88,6 +106,7 @@ module.exports = {
   Day: Day,
   Player: Player,
   PlayerSplits: PlayerSplits,
+  seasonSplits: seasonSplits,
   PlayerCareerSplits: PlayerCareerSplits,
   Feed: Feed,
   PlayerFeed: PlayerFeed,

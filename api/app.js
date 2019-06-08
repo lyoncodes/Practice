@@ -49,17 +49,19 @@ function searchPlayer (req, res) {
        let newPlayerSplits = new PlayerSplits(result)
    fetchProfile(id)
      .then (result => {
-       let newPlayerCareerSplits = new PlayerCareerSplits(result)
-       let trend = scoringTrend(newPlayerSplits,newPlayerCareerSplits)
+       let seasonStats = result.seasonTotalsRegularSeason.map(stats => new seasonSplits(stats));
+       console.log(seasonStats); 
+       let newPlayerCareerSplits = new PlayerCareerSplits(result);
+       let trend = scoringTrend(newPlayerSplits,newPlayerCareerSplits);
    fetchShotChart(id, season, games)
      .then (result => {
        let data = result.shot_Chart_Detail
- res.render('show', {newPlayer, newPlayerSplits, newPlayerCareerSplits, trend, data})
+ res.render('show', {newPlayer, newPlayerSplits, seasonStats, newPlayerCareerSplits, trend, data})
      })
      })
      })
      })
- .catch(error => console.log('something is wrong -> :', error))
+ .catch(error => console.log('something is wrong -> :', error));
 }
 
 function scoringTrend(seasonAvg, careerAvg) {
@@ -75,6 +77,7 @@ function scoringTrend(seasonAvg, careerAvg) {
 const Day = constructors.Day;
 const Player = constructors.Player;
 const PlayerSplits = constructors.PlayerSplits;
+const seasonSplits = constructors.seasonSplits;
 const PlayerCareerSplits = constructors.PlayerCareerSplits;
 const Feed = constructors.Feed;
 const PlayerFeed = constructors.PlayerFeed;
