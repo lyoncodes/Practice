@@ -58,19 +58,19 @@ function PlayerCareerSplits (obj) {
 
 function seasonSplits (obj) {
   this.season = obj.seasonId;
- this.gp = obj.gp;
- this.mpg = obj.min;
- this.fgPct = obj.fgPct;
- this.fg3Pct = obj.fg3Pct;
- this.ftPct = obj.ftPct;
- this.reb = obj.reb;
- this.oreb = obj.oreb;
- this.ast = obj.ast;
- this.blk = obj.blk;
- this.stl = obj.stl;
- this.to = obj.tov;
- this.pf = obj.pf;
- this.ppg = obj.pts
+  this.gp = obj.gp;
+  this.mpg = obj.min;
+  this.fgPct = obj.fgPct;
+  this.fg3Pct = obj.fg3Pct;
+  this.ftPct = obj.ftPct;
+  this.reb = obj.reb;
+  this.oreb = obj.oreb;
+  this.ast = obj.ast;
+  this.blk = obj.blk;
+  this.stl = obj.stl;
+  this.to = obj.tov;
+  this.pf = obj.pf;
+  this.ppg = obj.pts
 }
 
 function Feed (obj) {
@@ -82,6 +82,24 @@ function Feed (obj) {
   this.q3 = obj.ptsQtr3;
   this.q4 = obj.ptsQtr4;
   this.final = obj.pts;
+}
+function EastStandings (obj) {
+  this.conference = obj.conference;
+  this.team = obj.team;
+  this.w = obj.w;
+  this.l = obj.l;
+  this.wPct = obj.wPct;
+  this.homeRecord = obj.homeRecord;
+  this.roadRecord = obj.roadRecord;
+}
+function WestStandings (obj) {
+  this.conference = obj.conference;
+  this.team = obj.team;
+  this.w = obj.w;
+  this.l = obj.l;
+  this.wPct = obj.wPct;
+  this.homeRecord = obj.homeRecord;
+  this.roadRecord = obj.roadRecord;
 }
 
 function PlayerFeed (obj) {
@@ -109,6 +127,8 @@ module.exports = {
   seasonSplits: seasonSplits,
   PlayerCareerSplits: PlayerCareerSplits,
   Feed: Feed,
+  EastStandings: EastStandings,
+  WestStandings: WestStandings,
   PlayerFeed: PlayerFeed,
   shotChart: shotChart
 }

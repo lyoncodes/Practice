@@ -13,8 +13,12 @@ function homeFeed (req, res) {
  let today = dayToday();
  NBA.stats.scoreboard({GameID: "00", DayOffset: "0", gameDate:`${today.month} - ${today.day} - ${today.year}`})
  .then (result => {
-   let games = result.lineScore.map(games => new Feed(games))
-   res.render('index', {result, games})
+  let games = result.lineScore.map(games => new Feed(games));
+  let eastStandings = result.eastConfStandingsByDay.map(standings => new EastStandings(standings));
+
+  eastStandings.forEach(el => console.log(el.team));
+
+  res.render('index', {result, games, eastStandings})
  })
 }
 
@@ -50,7 +54,6 @@ function searchPlayer (req, res) {
    fetchProfile(id)
      .then (result => {
        let seasonStats = result.seasonTotalsRegularSeason.map(stats => new seasonSplits(stats));
-       console.log(seasonStats); 
        let newPlayerCareerSplits = new PlayerCareerSplits(result);
        let trend = scoringTrend(newPlayerSplits,newPlayerCareerSplits);
    fetchShotChart(id, season, games)
@@ -80,6 +83,8 @@ const PlayerSplits = constructors.PlayerSplits;
 const seasonSplits = constructors.seasonSplits;
 const PlayerCareerSplits = constructors.PlayerCareerSplits;
 const Feed = constructors.Feed;
+const EastStandings = constructors.EastStandings;
+const WestStandings = constructors.WestStandings;
 const PlayerFeed = constructors.PlayerFeed;
 const shotChart = constructors.shotChart;
 

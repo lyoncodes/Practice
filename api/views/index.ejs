@@ -4,17 +4,27 @@
   <%- include('../views/head.ejs'); %>
 </head>
 <body>
-<div class="search-form">
-  <%- include('../views/form.ejs') %>
-</div>
-<% if (result.lineScore.length === 0) { %>
-<div class="feed-error">
-  <h1>No Games Today!</h1>
-</div>
-<% } else { %>
-<div class="feed">
-  <%- include('../views/feed.ejs') %>
-</div>
-<% }; %>
+  <div class="search-form">
+    <%- include('../views/form.ejs') %>
+  </div>
+  <% if (result.lineScore.length === 0) { %>
+    <div class="feed-error">
+      <h1>No Games Today!</h1>
+    </div>
+    <% } else { %>
+      <div class="feed">
+        <%- include('../views/feed.ejs') %>
+      </div>
+      <% }; %>
+  <div>
+  <% eastStandings.forEach(team => { %>
+      <p><%= team.team %></p>  
+      <p><%= team.w %></p>  
+      <p><%= team.l %></p>  
+      <p><%= team.wPct %></p>  
+      <p><%= team.homeRecord %></p>
+      <p><%= team.roadRecord %></p>  
+      <% }) %>
+  </div>
 </body>
 </html>

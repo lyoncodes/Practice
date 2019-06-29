@@ -10,11 +10,9 @@ TASKS:
 FEATURES:
   * Player Transaction Feed on Home Page
   
-  * Add Comparison Analytics
-    * Player Career Stats
-      * if trend is +, display the text as green
-      * if trend is -, display the text as red
-    * Render All Seasons to Table
-  * Add Shotchart
+  * Comparison Analytics
+    * if trend is +, display the text as green
+    * if trend is -, display the text as red
+    * Add Shotchart
 
   * Add conference standings to home page
