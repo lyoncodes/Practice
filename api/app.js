@@ -15,10 +15,8 @@ function homeFeed (req, res) {
  .then (result => {
   let games = result.lineScore.map(games => new Feed(games));
   let eastStandings = result.eastConfStandingsByDay.map(standings => new EastStandings(standings));
-
-  eastStandings.forEach(el => console.log(el.team));
-
-  res.render('index', {result, games, eastStandings})
+  let westStandings = result.westConfStandingsByDay.map(standings => new WestStandings(standings));
+  res.render('index', {result, games, eastStandings, westStandings})
  })
 }
 
@@ -59,6 +57,7 @@ function searchPlayer (req, res) {
    fetchShotChart(id, season, games)
      .then (result => {
        let data = result.shot_Chart_Detail
+       console.log(data);
  res.render('show', {newPlayer, newPlayerSplits, seasonStats, newPlayerCareerSplits, trend, data})
      })
      })
