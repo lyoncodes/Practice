@@ -16,6 +16,7 @@
         <%- include('../views/feed.ejs') %>
       </div>
       <% }; %>
+
   <div>
   <% eastStandings.forEach(team => { %>
       <p><%= team.team %></p>  
@@ -25,6 +26,15 @@
       <p><%= team.homeRecord %></p>
       <p><%= team.roadRecord %></p>  
       <% }) %>
+  <% westStandings.forEach(team => { %>
+      <p><%= team.team %></p>  
+      <p><%= team.w %></p>  
+      <p><%= team.l %></p>  
+      <p><%= team.wPct %></p>  
+      <p><%= team.homeRecord %></p>
+      <p><%= team.roadRecord %></p>  
+      <% }) %>      
   </div>
+  
 </body>
 </html>
